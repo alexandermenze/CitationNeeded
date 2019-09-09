@@ -5,6 +5,7 @@ namespace CitationNeeded.Domain.ValueTypes
 {
     public class CitationGroup
     {
+        public string Id { get; set; }
         public User Author { get; set; }
         public DateTime Created { get; set; }
         public IEnumerable<Citation> Citations { get; set; }
