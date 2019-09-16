@@ -1,4 +1,6 @@
 ﻿using CitationNeeded.Database.Database;
+using CitationNeeded.Database.Services;
+using CitationNeeded.Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +25,12 @@ namespace CitationNeeded.WebApp
             services.AddDbContext<CitationContext>(
                 o => o.UseMySql(Configuration["AppSettings:ConnectionString"], 
                 mo => mo.MigrationsAssembly("CitationNeeded.Database")));
+
+            services.AddDbContext<AccountContext>(
+                o => o.UseMySql(Configuration["AppSettings:ConnectionString"],
+                mo => mo.MigrationsAssembly("CitationNeeded.Database")));
+
+            services.AddTransient<ICredentialVerifier, DatabaseCredentialVerifier>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
