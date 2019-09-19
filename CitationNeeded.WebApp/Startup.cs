@@ -2,6 +2,7 @@
 using CitationNeeded.Database.Database;
 using CitationNeeded.Database.Services;
 using CitationNeeded.Domain.Interfaces;
+using CitationNeeded.WebApp.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +37,7 @@ namespace CitationNeeded.WebApp
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ICredentialVerifier, DatabaseCredentialVerifier>();
             services.AddTransient<IHashService, BcryptHashService>();
+            services.AddTransient<IIdentityService, IdentityService>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();
