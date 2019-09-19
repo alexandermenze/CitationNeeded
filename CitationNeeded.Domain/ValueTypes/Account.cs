@@ -1,4 +1,4 @@
-﻿namespace CitationNeeded.Domain.ValueTypes.Account
+﻿namespace CitationNeeded.Domain.ValueTypes
 {
     public class Account
     {

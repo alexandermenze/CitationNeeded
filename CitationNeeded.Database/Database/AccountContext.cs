@@ -1,4 +1,4 @@
-﻿using CitationNeeded.Domain.ValueTypes.Account;
+﻿using CitationNeeded.Domain.ValueTypes;
 using Microsoft.EntityFrameworkCore;
 
 namespace CitationNeeded.Database.Database

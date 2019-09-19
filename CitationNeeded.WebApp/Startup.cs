@@ -1,8 +1,11 @@
-﻿using CitationNeeded.Database.Database;
+﻿using CitationNeeded.Cryptography.Hash;
+using CitationNeeded.Database.Database;
 using CitationNeeded.Database.Services;
 using CitationNeeded.Domain.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +33,12 @@ namespace CitationNeeded.WebApp
                 o => o.UseMySql(Configuration["AppSettings:ConnectionString"],
                 mo => mo.MigrationsAssembly("CitationNeeded.Database")));
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ICredentialVerifier, DatabaseCredentialVerifier>();
+            services.AddTransient<IHashService, BcryptHashService>();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -42,6 +50,10 @@ namespace CitationNeeded.WebApp
 
             app.UseStaticFiles();
             app.UseDefaultFiles();
+
+            app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }

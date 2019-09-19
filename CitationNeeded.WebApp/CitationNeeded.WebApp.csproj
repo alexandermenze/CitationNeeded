@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CitationNeeded.Cryptography\CitationNeeded.Cryptography.csproj" />
     <ProjectReference Include="..\CitationNeeded.Database\CitationNeeded.Database.csproj" />
   </ItemGroup>
 

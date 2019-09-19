@@ -3,8 +3,10 @@ using System.Threading.Tasks;
 
 namespace CitationNeeded.Domain.Interfaces
 {
-    public interface ICredentialVerifier
+    public interface IIdentityService
     {
-        Task<bool> VerifyAsync(Credentials credentials);
+        Task LogIn(Account account);
+        Task LogOut();
+        Account GetIdentity();
     }
 }

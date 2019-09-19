@@ -9,8 +9,10 @@
 <form method="post">
     <label asp-for="Username">Username: </label>
     <input asp-for="Username" />
+    <span asp-validation-for="Username"></span>
     <label asp-for="Password">Password: </label>
     <input asp-for="Password" />
+    <span asp-validation-for="Password"></span>
     <input type="submit" />
 </form>
 
