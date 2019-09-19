@@ -6,8 +6,12 @@
 
 <h1>Index</h1>
 
-@foreach(var s in Model.BlaBla)
+@if(Model.Account == null)
 {
-<h2><b>@s</b></h2>
+    <p>>You are not logged in!</p>
+}
+else
+{
+    <p>Welcome, @Model.Account.Username!</p>
 }
 

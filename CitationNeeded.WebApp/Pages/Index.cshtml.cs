@@ -1,21 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Generic;
+﻿using CitationNeeded.Domain.Exceptions;
+using CitationNeeded.Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CitationNeeded.WebApp.Pages
 {
     public class IndexModel : PageModel
     {
-        public IEnumerable<string> BlaBla { get; set; }
+        private readonly IIdentityService _identityService;
+
+        public Domain.ValueTypes.Account Account { get; set; }
+
+        public IndexModel(IIdentityService identityService)
+        {
+            _identityService = identityService;
+        }
 
         public void OnGet()
         {
-            BlaBla = new List<string>()
+            try
             {
-                "Eins",
-                "Zwei",
-                "Drie",
-                "Vier"
-            };
+                Account = _identityService.GetIdentity();
+            }
+            catch (IdentityException)
+            {
+            }
         }
     }
 }
