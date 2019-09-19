@@ -2,6 +2,7 @@
 using CitationNeeded.Database.Database;
 using CitationNeeded.Database.Services;
 using CitationNeeded.Domain.Interfaces;
+using CitationNeeded.Infrastructure.Mail;
 using CitationNeeded.WebApp.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +36,7 @@ namespace CitationNeeded.WebApp
                 mo => mo.MigrationsAssembly("CitationNeeded.Database")));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IEmailService, SendGridEmailService>();
             services.AddTransient<ICredentialVerifier, DatabaseCredentialVerifier>();
             services.AddTransient<IHashService, BcryptHashService>();
             services.AddTransient<IIdentityService, IdentityService>();
