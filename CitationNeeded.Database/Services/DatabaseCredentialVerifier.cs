@@ -1,6 +1,6 @@
 ﻿using CitationNeeded.Database.Database;
 using CitationNeeded.Domain.Interfaces;
-using CitationNeeded.Domain.ValueTypes.Account;
+using CitationNeeded.Domain.ValueTypes;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
