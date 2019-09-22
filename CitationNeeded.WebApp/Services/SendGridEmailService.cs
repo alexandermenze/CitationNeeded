@@ -10,10 +10,10 @@ namespace CitationNeeded.Infrastructure.Mail
 {
     public class SendGridEmailService : IEmailService
     {
-        private readonly IOptionsMonitor<AppSettings> _appSettings;
+        private readonly IOptions<AppSettings> _appSettings;
         private ISendGridClient _sendGridClient;
 
-        public SendGridEmailService(IOptionsMonitor<AppSettings> appSettings)
+        public SendGridEmailService(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings;
         }
@@ -30,7 +30,7 @@ namespace CitationNeeded.Infrastructure.Mail
             if (_sendGridClient != null)
                 return;
 
-            var apiKey = _appSettings.CurrentValue.SendGridApiKey;
+            var apiKey = _appSettings.Value.SendGridApiKey;
 
             if (apiKey == null)
                 throw new InvalidOperationException("No send grid api key set in configuration!");

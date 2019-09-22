@@ -36,7 +36,7 @@ namespace CitationNeeded.WebApp
                 o => o.UseMySql(Configuration["AppSettings:ConnectionString"],
                 mo => mo.MigrationsAssembly("CitationNeeded.Database")));
 
-            services.Configure<AppSettings>(Configuration);
+            services.Configure<AppSettings>(Configuration.GetSection(nameof(AppSettings)));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IEmailService, SendGridEmailService>();
             services.AddTransient<ICredentialVerifier, DatabaseCredentialVerifier>();
