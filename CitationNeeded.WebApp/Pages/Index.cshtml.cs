@@ -29,7 +29,7 @@ namespace CitationNeeded.WebApp.Pages
                     From = "test@alexandermenze.de",
                     To = Account.Email,
                     Subject = "alexandermenze.de: Email verification code",
-                    Text = "Your code is 12345!"
+                    Content = "Your code is 12345!"
                 });
             }
             catch (IdentityException)

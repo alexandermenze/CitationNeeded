@@ -1,5 +1,6 @@
 ﻿using CitationNeeded.Domain.Interfaces;
 using CitationNeeded.Domain.ValueTypes;
+using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
@@ -9,9 +10,13 @@ namespace CitationNeeded.Infrastructure.Mail
 {
     public class SendGridEmailService : IEmailService
     {
-        private const string SendGridApiKeyEnvironmentVariable = "SENDGRID_APIKEY";
-
+        private readonly IOptionsMonitor<AppSettings> _appSettings;
         private ISendGridClient _sendGridClient;
+
+        public SendGridEmailService(IOptionsMonitor<AppSettings> appSettings)
+        {
+            _appSettings = appSettings;
+        }
 
         public async Task SendAsync(Email email)
         {
@@ -25,11 +30,10 @@ namespace CitationNeeded.Infrastructure.Mail
             if (_sendGridClient != null)
                 return;
 
-            var apiKey = Environment.GetEnvironmentVariable(
-                SendGridApiKeyEnvironmentVariable, EnvironmentVariableTarget.Machine);
+            var apiKey = _appSettings.CurrentValue.SendGridApiKey;
 
             if (apiKey == null)
-                throw new InvalidOperationException("No send grid api key set in environment variables!");
+                throw new InvalidOperationException("No send grid api key set in configuration!");
 
             _sendGridClient = new SendGridClient(apiKey);
         }
@@ -40,7 +44,7 @@ namespace CitationNeeded.Infrastructure.Mail
             var to = new EmailAddress(email.To);
 
             var sendGridMessage = 
-                MailHelper.CreateSingleEmail(from, to, email.Subject, email.Text, email.Html);
+                MailHelper.CreateSingleEmail(from, to, email.Subject, email.Content, email.Content);
 
             return sendGridMessage;
         }

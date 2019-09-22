@@ -2,6 +2,7 @@
 using CitationNeeded.Database.Database;
 using CitationNeeded.Database.Services;
 using CitationNeeded.Domain.Interfaces;
+using CitationNeeded.Domain.ValueTypes;
 using CitationNeeded.Infrastructure.Mail;
 using CitationNeeded.WebApp.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -35,6 +36,7 @@ namespace CitationNeeded.WebApp
                 o => o.UseMySql(Configuration["AppSettings:ConnectionString"],
                 mo => mo.MigrationsAssembly("CitationNeeded.Database")));
 
+            services.Configure<AppSettings>(Configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IEmailService, SendGridEmailService>();
             services.AddTransient<ICredentialVerifier, DatabaseCredentialVerifier>();
