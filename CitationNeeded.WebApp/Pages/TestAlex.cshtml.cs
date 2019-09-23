@@ -3,7 +3,6 @@ using CitationNeeded.Domain.ValueTypes;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CitationNeeded.WebApp.Pages
@@ -22,11 +21,11 @@ namespace CitationNeeded.WebApp.Pages
 
         public async Task OnGetAsync()
         {
-            var book = CreateBook();
-            _citationContext.CitationBooks.Add(book);
-            await _citationContext.SaveChangesAsync();
-            Text = $"{_citationContext.CitationBooks.Count()}";
-            Books = _citationContext.CitationBooks;
+            //var book = CreateBook();
+            //_citationContext.CitationBooks.Add(book);
+            //await _citationContext.SaveChangesAsync();
+            //Text = $"{_citationContext.CitationBooks.Count()}";
+            //Books = _citationContext.CitationBooks;
         }
 
         private CitationBook CreateBook()
@@ -34,13 +33,13 @@ namespace CitationNeeded.WebApp.Pages
             var author = new User
             {
                 Id = $"{Guid.NewGuid()}",
-                Name = "Lars Arensmeier"
+                FirstName = "Lars Arensmeier"
             };
 
             var citationPerson = new User
             {
                 Id = $"{Guid.NewGuid()}",
-                Name = "Cedric Strate"
+                FirstName = "Cedric Strate"
             };
 
             return new CitationBook
