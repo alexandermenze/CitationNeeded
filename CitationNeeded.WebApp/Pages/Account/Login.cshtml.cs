@@ -41,6 +41,12 @@ namespace CitationNeeded.WebApp.Pages.Account
                 return Page();
             }
 
+            if(!await _identityService.CheckEmailVerified())
+            {
+                ModelState.AddModelError(nameof(Username), "Email is not verified!");
+                return Page();
+            }
+
             await _identityService.LogIn(GetAccount(credentials.Username));
 
             return RedirectToPage("/Index");

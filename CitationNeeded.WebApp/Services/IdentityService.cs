@@ -1,10 +1,13 @@
-﻿using CitationNeeded.Domain.Exceptions;
+﻿using CitationNeeded.Database.Database;
+using CitationNeeded.Domain.Exceptions;
 using CitationNeeded.Domain.Interfaces;
 using CitationNeeded.Domain.ValueTypes;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -13,10 +16,12 @@ namespace CitationNeeded.WebApp.Services
     public class IdentityService : IIdentityService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly AccountContext _accountContext;
 
-        public IdentityService(IHttpContextAccessor httpContextAccessor)
+        public IdentityService(IHttpContextAccessor httpContextAccessor, AccountContext accountContext)
         {
             _httpContextAccessor = httpContextAccessor;
+            _accountContext = accountContext;
         }
 
         public Account GetIdentity()
@@ -27,12 +32,6 @@ namespace CitationNeeded.WebApp.Services
                 Username = GetClaimValue(ClaimTypes.Name),
                 Email = GetClaimValue(ClaimTypes.Email)
             };
-
-            if (account.Id == null || account.Username == null || account.Email == null)
-            {
-                throw new IdentityException(
-                    $"Error reading identity values! Id: {account.Id}, Username: {account.Username}, Email: {account.Email}");
-            }
 
             return account;
         }
@@ -60,12 +59,25 @@ namespace CitationNeeded.WebApp.Services
                 CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
+        public async Task<bool> CheckEmailVerified()
+        {
+            var id = GetClaimValue(ClaimTypes.NameIdentifier);
+
+            var verifications = await _accountContext
+                .AccountVerifications
+                .Where(a => string.CompareOrdinal(a.Account.Id, id) == 0)
+                .ToListAsync();
+
+            return verifications.All(v => v.IsVerified);
+        }
+
         private string GetClaimValue(string claimType)
         {
             return _httpContextAccessor
                 .HttpContext
                 ?.User
-                ?.FindFirstValue(claimType);
+                ?.FindFirstValue(claimType)
+                ?? throw new IdentityException($"Could not read identity claim value for {claimType}!");
         }
 
         private HttpContext GetHttpContext()
