@@ -20,7 +20,10 @@ namespace CitationNeeded.WebApp.Pages.Account
 
         [BindProperty]
         [Required]
-        public string Username { get; set; }
+        public string FirstName { get; set; }
+        [BindProperty]
+        [Required]
+        public string LastName { get; set; }
         [BindProperty]
         [Required]
         [DataType(DataType.Password)]
@@ -50,9 +53,15 @@ namespace CitationNeeded.WebApp.Pages.Account
 
         private bool ValidateInput()
         {
-            if (string.IsNullOrEmpty(Username))
+            if (string.IsNullOrEmpty(FirstName))
             {
-                ModelState.AddModelError(nameof(Username), string.Empty);
+                ModelState.AddModelError(nameof(FirstName), string.Empty);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(LastName))
+            {
+                ModelState.AddModelError(nameof(LastName), string.Empty);
                 return false;
             }
 
@@ -65,12 +74,6 @@ namespace CitationNeeded.WebApp.Pages.Account
             if (string.IsNullOrEmpty(Email))
             {
                 ModelState.AddModelError(nameof(Email), string.Empty);
-                return false;
-            }
-
-            if (_accountContext.Accounts.Any(a => string.Compare(a.Username, Username) == 0))
-            {
-                ModelState.AddModelError(nameof(Username), "Name already taken!");
                 return false;
             }
 
@@ -87,7 +90,8 @@ namespace CitationNeeded.WebApp.Pages.Account
         {
             var account = new Domain.ValueTypes.Account
             {
-                Username = Username,
+                FirstName = FirstName,
+                LastName = LastName,
                 Email = Email,
                 HashedPassword = _hashService.Hash(Password)
             };

@@ -19,7 +19,7 @@ namespace CitationNeeded.Database.Services
 
         public async Task<bool> VerifyAsync(Credentials credentials)
         {
-            var user = await _accountContext.Accounts.SingleOrDefaultAsync(u => u.Username.Equals(credentials.Username))
+            var user = await _accountContext.Accounts.SingleOrDefaultAsync(u => u.Email.Equals(credentials.Email))
                 .ConfigureAwait(false);
 
             return user == null

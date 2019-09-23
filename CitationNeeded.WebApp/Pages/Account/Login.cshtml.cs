@@ -17,7 +17,8 @@ namespace CitationNeeded.WebApp.Pages.Account
 
         [BindProperty]
         [Required]
-        public string Username { get; set; }
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
         [BindProperty]
         [Required]
         [DataType(DataType.Password)]
@@ -32,29 +33,29 @@ namespace CitationNeeded.WebApp.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var credentials = new Credentials { Username = Username, Password = Password };
+            var credentials = new Credentials { Email = Email, Password = Password };
 
             if(!await _credentialVerifier.VerifyAsync(credentials))
             {
-                ModelState.AddModelError(nameof(Username), "Invalid credentials");
+                ModelState.AddModelError(nameof(Email), "Invalid credentials");
                 ModelState.AddModelError(nameof(Password), "Invalid credentials");
                 return Page();
             }
 
             if(!await _identityService.CheckEmailVerified())
             {
-                ModelState.AddModelError(nameof(Username), "Email is not verified!");
+                ModelState.AddModelError(nameof(Email), "Email is not verified!");
                 return Page();
             }
 
-            await _identityService.LogIn(GetAccount(credentials.Username));
+            await _identityService.LogIn(GetAccount(credentials.Email));
 
             return RedirectToPage("/Index");
         }
 
-        private Domain.ValueTypes.Account GetAccount(string username)
+        private Domain.ValueTypes.Account GetAccount(string email)
         {
-            return _accountContext.Accounts.Single(a => string.CompareOrdinal(a.Username, username) == 0);
+            return _accountContext.Accounts.Single(a => string.CompareOrdinal(a.Email, email) == 0);
         }
     }
 }

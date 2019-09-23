@@ -33,13 +33,13 @@ namespace CitationNeeded.WebApp.Pages
             var author = new User
             {
                 Id = $"{Guid.NewGuid()}",
-                Name = "Lars Arensmeier"
+                FirstName = "Lars Arensmeier"
             };
 
             var citationPerson = new User
             {
                 Id = $"{Guid.NewGuid()}",
-                Name = "Cedric Strate"
+                FirstName = "Cedric Strate"
             };
 
             return new CitationBook

@@ -15,6 +15,9 @@ namespace CitationNeeded.WebApp.Services
 {
     public class IdentityService : IIdentityService
     {
+        private const string FirstNameClaimType = "FirstName";
+        private const string LastNameClaimType = "LastName";
+
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly AccountContext _accountContext;
 
@@ -29,7 +32,8 @@ namespace CitationNeeded.WebApp.Services
             var account = new Account
             {
                 Id = GetClaimValue(ClaimTypes.NameIdentifier),
-                Username = GetClaimValue(ClaimTypes.Name),
+                FirstName = GetClaimValue(FirstNameClaimType),
+                LastName = GetClaimValue(LastNameClaimType),
                 Email = GetClaimValue(ClaimTypes.Email)
             };
 
@@ -41,7 +45,8 @@ namespace CitationNeeded.WebApp.Services
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, account.Id),
-                new Claim(ClaimTypes.Name, account.Username),
+                new Claim(FirstNameClaimType, account.FirstName),
+                new Claim(LastNameClaimType, account.LastName),
                 new Claim(ClaimTypes.Email, account.Email)
             };
 
