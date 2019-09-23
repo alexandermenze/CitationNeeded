@@ -42,7 +42,7 @@ namespace CitationNeeded.WebApp.Pages.Account
                 return Page();
             }
 
-            if(!await _identityService.CheckEmailVerified())
+            if(!await _identityService.CheckEmailVerified(Email))
             {
                 ModelState.AddModelError(nameof(Email), "Email is not verified!");
                 return Page();

@@ -64,13 +64,11 @@ namespace CitationNeeded.WebApp.Services
                 CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
-        public async Task<bool> CheckEmailVerified()
+        public async Task<bool> CheckEmailVerified(string email)
         {
-            var id = GetClaimValue(ClaimTypes.NameIdentifier);
-
             var verifications = await _accountContext
                 .AccountVerifications
-                .Where(a => string.CompareOrdinal(a.Account.Id, id) == 0)
+                .Where(a => string.CompareOrdinal(a.Account.Email, email) == 0)
                 .ToListAsync();
 
             return verifications.All(v => v.IsVerified);

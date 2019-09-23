@@ -7,7 +7,7 @@ namespace CitationNeeded.Domain.Interfaces
     {
         Task LogIn(Account account);
         Task LogOut();
-        Task<bool> CheckEmailVerified();
+        Task<bool> CheckEmailVerified(string email);
         Account GetIdentity();
     }
 }
