@@ -103,6 +103,7 @@ namespace CitationNeeded.WebApp.Pages.Account
             var requestUrl = $"{Request.Scheme}://{Request.Host}";
 
             var token = GenerateToken();
+            var tokenUrl = $"{requestUrl}/Account/Verify?token={token}";
 
             _accountContext.AccountVerifications.Add(new AccountVerification
             {
@@ -116,7 +117,7 @@ namespace CitationNeeded.WebApp.Pages.Account
                 From = "account@alexandermenze.de",
                 To = account.Email,
                 Subject = "Email verification for CitationNeeded",
-                Content = $"Your verfication link: {requestUrl}/Account/Verify?token={token}"
+                Content = $"Your verfication link: \n<a href=\"{tokenUrl}\">{tokenUrl}</a>"
             });
             
             await _accountContext.SaveChangesAsync();
@@ -126,7 +127,7 @@ namespace CitationNeeded.WebApp.Pages.Account
         {
             var bytes = new byte[32];
             _cryptoService.GetBytes(bytes);
-            return BitConverter.ToString(bytes).Replace("-", "");
+            return Convert.ToBase64String(bytes);
         }
     }
 }
