@@ -3,6 +3,7 @@ using CitationNeeded.Domain.Interfaces;
 using CitationNeeded.Domain.ValueTypes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.WebUtilities;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -107,7 +108,7 @@ namespace CitationNeeded.WebApp.Pages.Account
             var requestUrl = $"{Request.Scheme}://{Request.Host}";
 
             var token = GenerateToken();
-            var tokenUrl = $"{requestUrl}/Account/Verify?token={token}";
+            var tokenUrl = QueryHelpers.AddQueryString($"{requestUrl}/Account/Verify", "token", token);
 
             _accountContext.AccountVerifications.Add(new AccountVerification
             {
