@@ -15,3 +15,8 @@ jobs:
         dotnet-version: '2.2.402'
     - run: dotnet restore
     - run: dotnet build --configuration Release
+    - uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: alexandermenze/citationneeded
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
