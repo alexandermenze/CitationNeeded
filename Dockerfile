@@ -2,4 +2,4 @@
 EXPOSE 80
 EXPOSE 443
 COPY ./app /etc/citationneeded/
-ENTRYPOINT ["sh", "-c", "ls -la"]
+CMD ["dotnet", "CitationNeeded.WebApp.dll"]
