@@ -13,6 +13,9 @@ jobs:
     - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '2.2.402' 
+    - run: ls -la
+    - run: dotnet restore
+    - run: dotnet build
     - uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: alexandermenze/citationneeded
