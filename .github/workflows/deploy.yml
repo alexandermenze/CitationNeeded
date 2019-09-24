@@ -13,12 +13,13 @@ jobs:
     - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '2.2.402' 
-    - run: ls -la
-    - run: dotnet restore
-    - run: dotnet build
+    - run: find ./ -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
+    - run: dotnet build -c Release -o /app
+    - run: dotnet publish -c Release -o /app
+    - run: find ./ -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
     - uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: alexandermenze/citationneeded
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        workdir: CitationNeeded.WebApp
+        dockerfile: ./CitationNeeded
