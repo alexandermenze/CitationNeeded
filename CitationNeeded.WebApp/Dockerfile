@@ -4,6 +4,7 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
+RUN find | sed 's|[^/]*/|- |g'
 RUN dotnet restore "CitationNeeded.WebApp.csproj"
 RUN dotnet build "CitationNeeded.WebApp.csproj" -c Release -o /app
 
