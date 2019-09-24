@@ -2,7 +2,7 @@
 {
     public class AppSettings
     {
-        public string ConnectionString { get; set; }
+        public string DbConnectionString { get; set; }
         public string SendGridApiKey { get; set; }
     }
 }
