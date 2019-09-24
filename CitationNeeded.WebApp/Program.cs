@@ -15,7 +15,6 @@ namespace CitationNeeded.WebApp
             WebHost.CreateDefaultBuilder(args)
                 .UseKestrel(o => o.ListenLocalhost(5000))
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseUrls("http://localhost:5000")
                 .UseStartup<Startup>();
     }
 }
