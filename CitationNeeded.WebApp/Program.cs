@@ -13,7 +13,7 @@ namespace CitationNeeded.WebApp
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseKestrel(o => o.ListenLocalhost(5000))
+                .UseKestrel(o => o.ListenAnyIP(5000))
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>();
     }
