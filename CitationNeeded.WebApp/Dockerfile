@@ -4,14 +4,14 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
-RUN ls
-RUN dotnet restore "CitationNeeded.WebApp.csproj"
-RUN dotnet build "CitationNeeded.WebApp.csproj" -c Release -o /app
-
-FROM build AS publish
-RUN dotnet publish "CitationNeeded.WebApp.csproj" -c Release -o /app
+WORKDIR /app
+COPY . .
+RUN ls && \
+	dotnet restore && \
+	dotnet build -c Release -o /app && \
+	dotnet publish -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=build /app .
 ENTRYPOINT ["dotnet", "CitationNeeded.WebApp.dll"]
