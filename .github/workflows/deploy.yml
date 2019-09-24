@@ -14,8 +14,7 @@ jobs:
       with:
         dotnet-version: '2.2.402' 
     - run: find ./ -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
-    - run: dotnet build -c Release -o ./app
-    - run: dotnet publish -c Release -o ./app
+    - run: dotnet publish -c Release -o ./../app
     - run: find ./ -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
     - uses: elgohr/Publish-Docker-Github-Action@master
       with:
