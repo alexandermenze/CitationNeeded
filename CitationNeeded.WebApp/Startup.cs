@@ -47,8 +47,13 @@ namespace CitationNeeded.WebApp
                 .AddCookie();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, 
+            IHostingEnvironment env,
+            AccountContext accountContext,
+            CitationContext citationContext)
         {
+            UpdateDatabase(accountContext, citationContext);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -62,6 +67,12 @@ namespace CitationNeeded.WebApp
             app.UseAuthentication();
 
             app.UseMvc();
+        }
+
+        private void UpdateDatabase(AccountContext accountContext, CitationContext citationContext)
+        {
+            accountContext.Database.Migrate();
+            citationContext.Database.Migrate();
         }
     }
 }
