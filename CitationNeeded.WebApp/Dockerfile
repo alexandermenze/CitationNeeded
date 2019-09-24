@@ -5,8 +5,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /app
-COPY . .
-RUN ls && \
+COPY ./ /app/
+RUN ls -la && \
 	dotnet restore && \
 	dotnet build -c Release -o /app && \
 	dotnet publish -c Release -o /app
