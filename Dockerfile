@@ -2,4 +2,5 @@
 EXPOSE 80
 EXPOSE 443
 COPY ./app /etc/citationneeded/
-CMD ["dotnet", "/etc/citationneeded/CitationNeeded.WebApp.dll"]
+WORKDIR /etc/citationneeded/
+CMD ["dotnet", "CitationNeeded.WebApp.dll"]
