@@ -13,9 +13,9 @@ namespace CitationNeeded.WebApp
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseKestrel()
+                .UseKestrel(o => o.ListenLocalhost(5000))
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseUrls("https://localhost:5000")
+                .UseUrls("http://localhost:5000")
                 .UseStartup<Startup>();
     }
 }
