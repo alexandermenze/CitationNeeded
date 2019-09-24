@@ -1,6 +1,5 @@
 ﻿FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
-EXPOSE 80
-EXPOSE 443
+EXPOSE 5000
 COPY ./app /etc/citationneeded/
 WORKDIR /etc/citationneeded/
 CMD ["dotnet", "CitationNeeded.WebApp.dll"]
