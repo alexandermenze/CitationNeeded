@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4_App", "4_App", "{A590FFB4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0_Documents", "0_Documents", "{99E487B6-6403-4AEA-BB33-73A6C4BF5D36}"
 	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
 		TextFile1.txt = TextFile1.txt
 	EndProjectSection
 EndProject
@@ -24,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitationNeeded.Database", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitationNeeded.Cryptography", "CitationNeeded.Cryptography\CitationNeeded.Cryptography.csproj", "{D0F66CB7-1C0D-4369-A2D5-B8319F5F59D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitationNeeded.Infrastructure", "CitationNeeded.Infrastructure\CitationNeeded.Infrastructure.csproj", "{9F0B917C-8096-4F5F-95A6-89EC3C23A983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitationNeeded.Infrastructure", "CitationNeeded.Infrastructure\CitationNeeded.Infrastructure.csproj", "{9F0B917C-8096-4F5F-95A6-89EC3C23A983}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
