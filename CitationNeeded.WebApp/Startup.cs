@@ -12,8 +12,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
 
 namespace CitationNeeded.WebApp
 {
@@ -49,8 +47,6 @@ namespace CitationNeeded.WebApp
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();
-
-            Configuration.AsEnumerable().ToList().ForEach(kv => Console.WriteLine($"{kv.Key} :: {kv.Value}"));
         }
 
         public void Configure(IApplicationBuilder app, 
