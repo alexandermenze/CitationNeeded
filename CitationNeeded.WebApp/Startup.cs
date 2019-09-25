@@ -30,12 +30,14 @@ namespace CitationNeeded.WebApp
         {
             services.AddMvc();
 
+            var connectionStringKey = $"{nameof(AppSettings)}:{nameof(AppSettings.DbConnectionString)}";
+
             services.AddDbContext<CitationContext>(
-                o => o.UseMySql(Configuration["AppSettings:ConnectionString"], 
+                o => o.UseMySql(Configuration[connectionStringKey], 
                 mo => mo.MigrationsAssembly("CitationNeeded.Database")));
 
             services.AddDbContext<AccountContext>(
-                o => o.UseMySql(Configuration["AppSettings:ConnectionString"],
+                o => o.UseMySql(Configuration[connectionStringKey],
                 mo => mo.MigrationsAssembly("CitationNeeded.Database")));
 
             services.Configure<AppSettings>(Configuration.GetSection(nameof(AppSettings)));
