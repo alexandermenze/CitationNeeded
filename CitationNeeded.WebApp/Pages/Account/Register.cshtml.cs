@@ -105,7 +105,7 @@ namespace CitationNeeded.WebApp.Pages.Account
 
         private async Task SendRegisterEmailAsync(Domain.ValueTypes.Account account)
         {
-            var requestUrl = $"{Request.Scheme}://{Request.Host}";
+            var requestUrl = $"https://{Request.Host}";
 
             var token = GenerateToken();
             var tokenUrl = QueryHelpers.AddQueryString($"{requestUrl}/Account/Verify", "token", token);
