@@ -9,5 +9,6 @@ namespace CitationNeeded.Domain.Interfaces
         Task LogOut();
         Task<bool> CheckEmailVerified(string email);
         Account GetIdentity();
+        bool IsLoggedIn();
     }
 }

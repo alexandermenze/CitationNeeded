@@ -31,10 +31,10 @@ namespace CitationNeeded.WebApp.Services
         {
             var account = new Account
             {
-                Id = GetClaimValue(ClaimTypes.NameIdentifier),
-                FirstName = GetClaimValue(FirstNameClaimType),
-                LastName = GetClaimValue(LastNameClaimType),
-                Email = GetClaimValue(ClaimTypes.Email)
+                Id = GetClaimValueOrThrow(ClaimTypes.NameIdentifier),
+                FirstName = GetClaimValueOrThrow(FirstNameClaimType),
+                LastName = GetClaimValueOrThrow(LastNameClaimType),
+                Email = GetClaimValueOrThrow(ClaimTypes.Email)
             };
 
             return account;
@@ -74,7 +74,7 @@ namespace CitationNeeded.WebApp.Services
             return verifications.All(v => v.IsVerified);
         }
 
-        private string GetClaimValue(string claimType)
+        private string GetClaimValueOrThrow(string claimType)
         {
             return _httpContextAccessor
                 .HttpContext
@@ -83,10 +83,26 @@ namespace CitationNeeded.WebApp.Services
                 ?? throw new IdentityException($"Could not read identity claim value for {claimType}!");
         }
 
+        private string GetClaimValue(string claimType)
+        {
+            return _httpContextAccessor
+                .HttpContext
+                ?.User
+                ?.FindFirstValue(claimType);
+        }
+
         private HttpContext GetHttpContext()
         {
             return _httpContextAccessor.HttpContext 
                 ?? throw new IdentityException("Identity service can only be used during request!");
+        }
+
+        public bool IsLoggedIn()
+        {
+            return GetClaimValue(ClaimTypes.NameIdentifier) != null
+                && GetClaimValue(FirstNameClaimType) != null
+                && GetClaimValue(LastNameClaimType) != null
+                && GetClaimValue(ClaimTypes.Email) != null;
         }
     }
 }

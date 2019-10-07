@@ -44,6 +44,7 @@ namespace CitationNeeded.WebApp
             services.AddTransient<ICredentialVerifier, DatabaseCredentialVerifier>();
             services.AddTransient<IHashService, BcryptHashService>();
             services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<IColorService, StringRandomColorService>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();

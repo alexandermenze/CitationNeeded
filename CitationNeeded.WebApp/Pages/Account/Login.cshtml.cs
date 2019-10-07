@@ -31,6 +31,14 @@ namespace CitationNeeded.WebApp.Pages.Account
             _accountContext = accountContext;
         }
 
+        public IActionResult OnGet()
+        {
+            if (_identityService.IsLoggedIn())
+                return Redirect("/Index");
+
+            return Page();
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             var credentials = new Credentials { Email = Email, Password = Password };

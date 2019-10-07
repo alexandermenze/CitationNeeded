@@ -1,17 +1,55 @@
-﻿<!DOCTYPE html>
+﻿@using CitationNeeded.Extensions
+
+@inject CitationNeeded.Domain.Interfaces.IIdentityService IdentityService
+@inject CitationNeeded.Domain.Interfaces.IColorService ColorService
+
+<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link href="~/css/CitationNeededTheme.min.css" rel="stylesheet" />
+    @*<link href="~/font-awesome/css/all.min.css" rel="stylesheet" />*@
 </head>
 <body>
+    <nav id="navigation" class="navbar">
+        <button class="navbar-toggler"><i class="fas fa-bars"></i></button>
+        <span class="navbar-brand">CitationNeeded</span>
+        <div id="user-nav">
+
+            @if (IdentityService.IsLoggedIn())
+            {
+                <div class="logged-in-user">
+                    <p>@IdentityService.GetIdentity().FirstName</p>
+                </div>
+                <div class="user-dropdown-trigger">
+                    <a href="#">
+                        @{ 
+                            var identity = IdentityService.GetIdentity();
+                            var nameString = $"{identity.FirstName}{identity.LastName}";
+                            var nameColor = ColorService.GenerateColorByString(nameString);
+                            var hexColor = nameColor.ToHex();
+                            var firstChar = identity.FirstName.FirstOrDefault();
+                        }
+                        <div class="user-icon-bg" style="background-color: @hexColor">
+                            <span class="user-icon" style="color: @hexColor">@firstChar</span>
+                        </div>
+                    </a>
+                </div>
+            }
+
+        </div>
+    </nav>
+
     <div>
         @RenderBody()
     </div>
 
-    <a href="/Account/Login">Login</a>
-    <a href="/Account/Register">Register</a>
-    <a href="/Account/Logout">Logout</a>
+    <div>
+        <a href="/Account/Login">Login</a>
+        <a href="/Account/Register">Register</a>
+        <a href="/Account/Logout">Logout</a>
+    </div>
 </body>
 </html>

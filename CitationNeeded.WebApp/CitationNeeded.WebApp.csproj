@@ -21,7 +21,12 @@
   <ItemGroup>
     <ProjectReference Include="..\CitationNeeded.Cryptography\CitationNeeded.Cryptography.csproj" />
     <ProjectReference Include="..\CitationNeeded.Database\CitationNeeded.Database.csproj" />
+    <ProjectReference Include="..\CitationNeeded.Extensions\CitationNeeded.Extensions.csproj" />
     <ProjectReference Include="..\CitationNeeded.Infrastructure\CitationNeeded.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 
 </Project>

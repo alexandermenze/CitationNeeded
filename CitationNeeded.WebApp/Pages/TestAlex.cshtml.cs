@@ -1,5 +1,6 @@
 ﻿using CitationNeeded.Database.Database;
 using CitationNeeded.Domain.ValueTypes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CitationNeeded.WebApp.Pages
 {
+    [Authorize]
     public class TestAlexModel : PageModel
     {
         private readonly CitationContext _citationContext;
