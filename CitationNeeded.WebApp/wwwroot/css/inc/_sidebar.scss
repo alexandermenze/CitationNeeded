@@ -1,0 +1,39 @@
+﻿#sidebar {
+    grid-area: sidebar;
+    border-right: 1px solid $grey-border;
+
+    .book-outline {
+        display: flex;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: 0 18px;
+        cursor: pointer;
+        color: $grey-text;
+        margin-top: 1px;
+
+        .book {
+            border-bottom: 1px solid $grey-border;
+            width: 100%;
+            margin-bottom: -1px;
+
+            .title {
+                margin-bottom: 0;
+                margin-top: 1rem;
+            }
+
+            .date {
+                font-size: $small-text-size;
+                color: $grey-text-light;
+            }
+        }
+
+        &:hover {
+            background-color: $green;
+            color: white;
+
+            .date {
+                color: white;
+            }
+        }
+    }
+}
