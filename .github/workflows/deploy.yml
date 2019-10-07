@@ -1,0 +1,21 @@
+name: CD
+
+on: 
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '2.2.402' 
+    - run: dotnet publish -c Release -o ./../app
+    - uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: alexandermenze/citationneeded
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}

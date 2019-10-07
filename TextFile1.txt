@@ -1,0 +1,12 @@
+Pages:
+
+Login
+Register
+Logout
+ResetPassword
+
+HomePage:
+  Sidebar mit Bücher
+
+Friends
+  s
