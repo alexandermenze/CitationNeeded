@@ -18,10 +18,12 @@ namespace CitationNeeded.WebApp
     public class Startup
     {
         public IConfiguration Configuration { get; private set; }
+        public IHostingEnvironment HostingEnvironment { get; private set; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             Configuration = configuration;
+            HostingEnvironment = hostingEnvironment;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -30,17 +32,31 @@ namespace CitationNeeded.WebApp
 
             var connectionStringKey = $"{nameof(AppSettings)}:{nameof(AppSettings.DbConnectionString)}";
 
-            services.AddDbContext<CitationContext>(
-                o => o.UseMySql(Configuration[connectionStringKey], 
-                mo => mo.MigrationsAssembly("CitationNeeded.Database")));
+            if (HostingEnvironment.IsDevelopment())
+            {
+                services.AddDbContext<CitationContext>(
+                    o => o.UseInMemoryDatabase("Citations"));
 
-            services.AddDbContext<AccountContext>(
-                o => o.UseMySql(Configuration[connectionStringKey],
-                mo => mo.MigrationsAssembly("CitationNeeded.Database")));
+                services.AddDbContext<AccountContext>(
+                    o => o.UseInMemoryDatabase("Accounts"));
+
+                services.AddSingleton<IEmailService, ConsoleEmailService>();
+            }
+            else
+            {
+                services.AddDbContext<CitationContext>(
+                    o => o.UseMySql(Configuration[connectionStringKey],
+                    mo => mo.MigrationsAssembly("CitationNeeded.Database")));
+
+                services.AddDbContext<AccountContext>(
+                    o => o.UseMySql(Configuration[connectionStringKey],
+                    mo => mo.MigrationsAssembly("CitationNeeded.Database")));
+
+                services.AddSingleton<IEmailService, SendGridEmailService>();
+            }
 
             services.Configure<AppSettings>(Configuration.GetSection(nameof(AppSettings)));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<IEmailService, SendGridEmailService>();
             services.AddTransient<ICredentialVerifier, DatabaseCredentialVerifier>();
             services.AddTransient<IHashService, BcryptHashService>();
             services.AddTransient<IIdentityService, IdentityService>();
@@ -55,11 +71,13 @@ namespace CitationNeeded.WebApp
             AccountContext accountContext,
             CitationContext citationContext)
         {
-            UpdateDatabase(accountContext, citationContext);
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                UpdateDatabase(accountContext, citationContext);
             }
 
             app.UseStaticFiles();
