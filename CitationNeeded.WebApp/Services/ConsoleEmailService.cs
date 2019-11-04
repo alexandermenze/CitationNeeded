@@ -1,6 +1,7 @@
 ﻿using CitationNeeded.Domain.Interfaces;
 using CitationNeeded.Domain.ValueTypes;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace CitationNeeded.WebApp.Services
@@ -22,7 +23,7 @@ namespace CitationNeeded.WebApp.Services
 
         private string FormatEmail(Email email)
         {
-            return $"From: {email.From}, To: {email.To}, Subject: {email.Subject}, Content: {email.Content}";
+            return $"From: {email.From}, To: {email.To}, Subject: {email.Subject},{Environment.NewLine} Content: {email.Content}";
         }
     }
 }

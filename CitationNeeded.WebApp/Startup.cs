@@ -35,10 +35,10 @@ namespace CitationNeeded.WebApp
             if (HostingEnvironment.IsDevelopment())
             {
                 services.AddDbContext<CitationContext>(
-                    o => o.UseInMemoryDatabase("Citations"));
+                    o => o.UseSqlite("Filename=Citations.db"));
 
                 services.AddDbContext<AccountContext>(
-                    o => o.UseInMemoryDatabase("Accounts"));
+                    o => o.UseSqlite("Filename=Accounts.db"));
 
                 services.AddSingleton<IEmailService, ConsoleEmailService>();
             }
@@ -74,6 +74,7 @@ namespace CitationNeeded.WebApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                SetupDev(accountContext, citationContext);
             }
             else
             {
@@ -94,6 +95,12 @@ namespace CitationNeeded.WebApp
         {
             accountContext.Database.Migrate();
             citationContext.Database.Migrate();
+        }
+
+        private void SetupDev(AccountContext accountContext, CitationContext citationContext)
+        {
+            accountContext.Database.EnsureCreated();
+            citationContext.Database.EnsureCreated();
         }
     }
 }
