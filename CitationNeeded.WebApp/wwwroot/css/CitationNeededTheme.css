@@ -19,38 +19,23 @@ body {
   grid-area: content;
   padding: 20px; }
 
-#logo {
-  grid-area: logo;
-  background-color: #f8f8f8;
-  border-bottom: 1px solid #ececec;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
 #navigation {
-  grid-area: navigation;
-  background-color: #f8f8f8;
-  border-bottom: 1px solid #ececec; }
-  @media (min-width: 768px) {
-    #navigation .navbar-toggler {
-      display: none; } }
+  grid-area: navigation; }
+  #navigation.bg-light {
+    background-color: #f8f8f8 !important;
+    border-bottom: 1px solid #ececec; }
   #navigation #user-nav {
-    margin-right: 16px;
-    display: flex; }
-    #navigation #user-nav .logged-in-user {
-      display: flex;
-      align-items: center; }
-      #navigation #user-nav .logged-in-user p {
-        font-size: 12px;
-        color: #666666;
-        margin: 0; }
-    #navigation #user-nav a {
-      text-decoration: none; }
-    #navigation #user-nav .user-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    padding: 0; }
+    #navigation #user-nav > span {
+      font-size: 12px;
+      color: #666666; }
+    #navigation #user-nav .user-icon-container {
       padding-left: 5px;
       margin-left: 5px;
       border-left: 1px dotted #666666; }
-      #navigation #user-nav .user-dropdown-trigger .user-icon-bg {
+      #navigation #user-nav .user-icon-container .user-icon-circle {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -58,12 +43,8 @@ body {
         height: 36px;
         border-radius: 18px;
         background-color: #FFE370; }
-        #navigation #user-nav .user-dropdown-trigger .user-icon-bg .user-icon {
+        #navigation #user-nav .user-icon-container .user-icon-circle .user-icon-text {
           filter: invert(100%); }
-      #navigation #user-nav .user-dropdown-trigger img {
-        width: 36px;
-        height: 36px;
-        border-radius: 18px; }
 
 #sidebar {
   grid-area: sidebar;

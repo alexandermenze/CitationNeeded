@@ -7,37 +7,45 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/css/CitationNeededTheme.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="~/twitter-bootstrap/js/bootstrap.min.js"></script>
+    <link href="~/css/CitationNeededTheme.min.css" rel="stylesheet">
 </head>
 <body>
-    <nav id="navigation" class="navbar">
+    <nav id="navigation" class="navbar navbar-expand navbar-light bg-light">
         <span class="navbar-brand">CitationNeeded</span>
-        <div id="user-nav">
 
-            @if (IdentityService.IsLoggedIn())
-            {
-                <div class="logged-in-user">
-                    <p>@IdentityService.GetIdentity().FirstName</p>
-                </div>
-                <div class="user-dropdown-trigger">
-                    <a href="#">
-                        @{ 
-                            var identity = IdentityService.GetIdentity();
-                            var nameString = $"{identity.FirstName}{identity.LastName}";
-                            var nameColor = ColorService.GenerateColorByString(nameString);
-                            var hexColor = nameColor.ToHex();
-                            var firstChar = identity.FirstName.FirstOrDefault();
-                        }
-                        <div class="user-icon-bg" style="background-color: @hexColor">
-                            <span class="user-icon" style="color: @hexColor">@firstChar</span>
+        @if (IdentityService.IsLoggedIn())
+        {
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav w-100">
+                    <li class="nav-item dropdown ml-auto">
+                        <a id="user-nav" class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>@IdentityService.GetIdentity().FirstName</span>
+                            @{
+                                var identity = IdentityService.GetIdentity();
+                                var nameString = $"{identity.FirstName}{identity.LastName}";
+                                var nameColor = ColorService.GenerateColorByString(nameString);
+                                var hexColor = nameColor.ToHex();
+                                var firstChar = identity.FirstName.FirstOrDefault();
+                            }
+                            <div class="user-icon-container">
+                                <div class="user-icon-circle" style="background-color: @hexColor">
+                                    <span class="user-icon-text" style="color: @hexColor">@firstChar</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/Account/Logout">Logout</a>
                         </div>
-                    </a>
-                </div>
-            }
-
-        </div>
+                    </li>
+                </ul>
+            </div>
+        }
     </nav>
 
     <div>
