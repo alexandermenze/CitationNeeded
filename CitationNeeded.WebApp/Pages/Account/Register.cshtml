@@ -4,28 +4,34 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
+    <div class="startpageDiv">
+        <h1>Registrieren</h1>
 
-<form method="post">
-    <div>
-        <label asp-for="FirstName">FirstName: </label>
-        <input asp-for="FirstName" />
-        <span asp-validation-for="FirstName"></span>
+        <p>Registriere dich ein um die Funktionen von CitationNeeded zu Nutzen!</p>
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="FirstName">Vorname: </label>
+                <input class="form-control" asp-for="FirstName" />
+                <span asp-validation-for="FirstName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName">Nachname: </label>
+                <input class="form-control" asp-for="LastName" />
+                <span asp-validation-for="LastName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Passwort: </label>
+                <input class="form-control" asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">E-Mail: </label>
+                <input class="form-control" asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <button type="submit" class="btn btn-primary startupBtn">Registrieren</button>
+        </form>
+
+        <p>Schon registriert? Dann logge dich  <a class="registerLink" href="/Account/Login">hier</a> ein!</p>
     </div>
-    <div>
-        <label asp-for="LastName">LastName: </label>
-        <input asp-for="LastName" />
-        <span asp-validation-for="LastName"></span>
-    </div>
-    <div>
-        <label asp-for="Password">Password: </label>
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label asp-for="Email">E-Mail: </label>
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
-    </div>
-    <input type="submit" />
-</form>
