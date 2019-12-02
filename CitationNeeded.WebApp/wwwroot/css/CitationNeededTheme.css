@@ -5,7 +5,7 @@ body {
   display: grid;
   height: 100vh;
   grid-template-rows: 60px 1fr;
-  grid-template-areas: "navigation navigation" "content content"; }
+  grid-template-areas: "navigation" "content"; }
 
 @media (min-width: 768px) {
   body {
