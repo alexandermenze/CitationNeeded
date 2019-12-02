@@ -8,7 +8,6 @@ namespace CitationNeeded.WebApp.Pages
     {
         public void OnGet()
         {
-            
         }
     }
 }

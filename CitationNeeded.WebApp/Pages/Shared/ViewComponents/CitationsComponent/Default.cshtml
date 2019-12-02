@@ -1,0 +1,6 @@
+﻿@model CitationNeeded.Domain.ValueTypes.CitationBook
+
+@foreach(var citation in Model.CitationGroups)
+{
+    <p>@citation.Id</p>
+}
