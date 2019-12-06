@@ -59,8 +59,7 @@ body {
       border-bottom: 1px solid #ececec;
       margin-bottom: -1px; }
       #sidebar .book-outline .book .title {
-        margin-bottom: 0;
-        margin-top: 1rem; }
+        margin: 1rem 0; }
       #sidebar .book-outline .book .date {
         font-size: 12px;
         color: #878787; }

@@ -14,13 +14,11 @@ else
         <div class="book-outline">
             <div class="book w-100">
                 <p class="title">Zitatbuch1</p>
-                <p class="date">06.12.2019</p>
             </div>
         </div>
         <div class="book-outline">
             <div class="book w-100">
                 <p class="title">Zitatbuch1</p>
-                <p class="date">06.12.2019</p>
             </div>
         </div>
         <div class="book-outline__new">
@@ -31,7 +29,12 @@ else
     </aside>
 }
 
-@foreach(var book in Model.CitationBooks)
+@foreach (var book in Model.CitationBooks)
 {
-<p>@book.CitationGroups</p>
+    <div class="book-outline">
+        <div class="book w-100">
+            <p class="title">@book.Name</p>
+        </div>
+    </div>
+    <p>@book.CitationGroups</p>
 }
