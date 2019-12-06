@@ -15,3 +15,7 @@ else
     <p>Welcome, @Model.Account.FirstName!</p>
 }
 
+@foreach(var book in Model.CitationBooks)
+{
+<p>@book.CitationGroups</p>
+}

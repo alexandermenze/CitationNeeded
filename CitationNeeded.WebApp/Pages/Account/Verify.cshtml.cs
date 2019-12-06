@@ -8,11 +8,11 @@ namespace CitationNeeded.WebApp.Pages.Account
 {
     public class VerifyModel : PageModel
     {
-        private readonly AccountContext _accountContext;
+        private readonly CitationContext _citationContext;
 
-        public VerifyModel(AccountContext accountContext)
+        public VerifyModel(CitationContext citationContext)
         {
-            _accountContext = accountContext;
+            _citationContext = citationContext;
         }
 
         public async Task<IActionResult> OnGetAsync([FromQuery] string token)
@@ -20,7 +20,7 @@ namespace CitationNeeded.WebApp.Pages.Account
             if (token == null)
                 return Redirect("/Account/Login");
 
-            var verification = await _accountContext
+            var verification = await _citationContext
                 .AccountVerifications
                 .SingleOrDefaultAsync(a => string.CompareOrdinal(a.VerificationToken, token) == 0);
 
@@ -29,7 +29,7 @@ namespace CitationNeeded.WebApp.Pages.Account
 
             verification.IsVerified = true;
 
-            await _accountContext.SaveChangesAsync();
+            await _citationContext.SaveChangesAsync();
 
             return Redirect("/Account/Login");
         }
