@@ -16,6 +16,7 @@ else
             <div class="book-outline">
                 <div class="book w-100">
                     <p class="title">@book.Name</p>
+                    <p class="date">@book.CitationGroups.Max(c => c.Created).ToString("d")</p>
                 </div>
             </div>
         }
