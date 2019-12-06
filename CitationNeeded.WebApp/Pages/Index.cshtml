@@ -11,32 +11,20 @@
 else
 {
     <aside id="sidebar" class="d-md-block d-none">
-        <div class="book-outline">
-            <div class="book w-100">
-                <p class="title">Zitatbuch1</p>
+        @foreach (var book in Model.CitationBooks)
+        {
+            <div class="book-outline">
+                <div class="book w-100">
+                    <p class="title">@book.Name</p>
+                    <p class="date">@book.CitationGroups.Max(c => c.Created).ToString("d")</p>
+                </div>
             </div>
-        </div>
-        <div class="book-outline">
-            <div class="book w-100">
-                <p class="title">Zitatbuch1</p>
-            </div>
-        </div>
+        }
+
         <div class="book-outline__new">
             <div class="book__new w-100">
-                <span class="plus">+</span>
+                <i class="fas fa-plus"></i>
             </div>
         </div>
     </aside>
 }
-
-@foreach (var book in Model.CitationBooks)
-{
-    <div class="book-outline">
-        <div class="book w-100">
-            <p class="title">@book.Name</p>
-            <p class="date">@book.CitationGroups.Max(c => c.Created).ToString("d")</p>
-        </div>
-    </div>
-    <p>@book.CitationGroups</p>
-}
-

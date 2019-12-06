@@ -63,7 +63,8 @@ body {
       border-bottom: 1px solid #ececec;
       margin-bottom: -1px; }
       #sidebar .book-outline .book .title {
-        margin: 1rem 0; }
+        margin-bottom: 0;
+        margin-top: 1rem; }
       #sidebar .book-outline .book .date {
         font-size: 12px;
         color: #878787; }
@@ -85,7 +86,7 @@ body {
       border-radius: 7px;
       margin: 0;
       cursor: pointer; }
-      #sidebar .book-outline__new .book__new span {
+      #sidebar .book-outline__new .book__new .fas {
         margin: 1rem 0; }
       #sidebar .book-outline__new .book__new:hover {
         background-color: #32a852;
