@@ -18,6 +18,7 @@ namespace CitationNeeded.WebApp.Pages.Account
         private readonly CitationContext _citationContext;
         private readonly IHashService _hashService;
         private readonly IEmailService _emailService;
+        private readonly IIdentityService _identityService;
 
         [BindProperty]
         [Required]
@@ -35,11 +36,24 @@ namespace CitationNeeded.WebApp.Pages.Account
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        public RegisterModel(CitationContext citationContext, IHashService hashService, IEmailService emailService)
+        public RegisterModel(
+            CitationContext citationContext, 
+            IHashService hashService, 
+            IEmailService emailService,
+            IIdentityService identityService)
         {
             _citationContext = citationContext;
             _hashService = hashService;
             _emailService = emailService;
+            _identityService = identityService;
+        }
+
+        public IActionResult OnGet()
+        {
+            if (_identityService.IsLoggedIn())
+                return Redirect("/Index");
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -81,7 +95,7 @@ namespace CitationNeeded.WebApp.Pages.Account
 
             if (_citationContext.Accounts.Any(a => a.Email.ToUpperInvariant() == Email.ToUpperInvariant()))
             {
-                ModelState.AddModelError(nameof(Email), "Email already taken!");
+                ModelState.AddModelError(nameof(Email), string.Empty);
                 return false;
             }
 
