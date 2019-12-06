@@ -5,7 +5,7 @@ body {
   display: grid;
   height: 100vh;
   grid-template-rows: 60px 1fr;
-  grid-template-areas: "navigation navigation" "content content"; }
+  grid-template-areas: "navigation" "content"; }
 
 @media (min-width: 768px) {
   body {
@@ -91,3 +91,34 @@ body {
       color: white; }
       #sidebar .book-outline:hover .date {
         color: white; }
+
+body {
+  background: #ffffff; }
+
+.bodyDiv {
+  grid-column: span 2;
+  margin: auto; }
+
+.startpageDiv {
+  background: #f8f8f8;
+  border-radius: 15px;
+  box-shadow: 6px 6px 30px 5px rgba(0, 0, 0, 0.5);
+  padding: 10px; }
+  .startpageDiv .startupBtn {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    display: block; }
+  .startpageDiv h1 {
+    text-align: center; }
+  .startpageDiv p {
+    text-align: center; }
+
+@media (max-width: 768px) {
+  .bodyDiv {
+    grid-column: span 1; }
+  .startpageDiv {
+    background: #ffffff;
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%; } }

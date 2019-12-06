@@ -2,7 +2,7 @@
     display: grid;
     height: $container-height;
     grid-template-rows: $header-row-height $content-row-height;
-    grid-template-areas: "navigation navigation" "content content";
+    grid-template-areas: "navigation" "content";
 }
 
 @media (min-width: 768px) {

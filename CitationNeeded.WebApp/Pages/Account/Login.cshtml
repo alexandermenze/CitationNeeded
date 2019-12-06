@@ -3,20 +3,26 @@
 @{
     ViewData["Title"] = "Login";
 }
+<div class="startpageDiv">
+    <h1>Login</h1>
 
-<h1>Login</h1>
+    <p>Logge dich ein um die Funktionen von CitationNeeded zu Nutzen!</p>
 
-<form method="post">
-    <div>
-        <label asp-for="Email">Email: </label>
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
-    </div>
-    <div>
-        <label asp-for="Password">Password: </label>
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <input type="submit" />
-</form>
+    <form method="post">
+        <div class=" form-group">
+            <label asp-for="Email">Email: </label>
+            <input class="form-control" asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Password: </label>
+            <input class="form-control" asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <button type="submit" class="btn btn-primary startupBtn">Einloggen</button>
+    </form>
+
+    <p>Noch kein Konto? Dann registriere dich  <a class="registerLink" href="/Account/Register">hier</a>!</p>
+   
+</div>
 
