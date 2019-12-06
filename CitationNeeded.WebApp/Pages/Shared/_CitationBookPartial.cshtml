@@ -1,0 +1,16 @@
+﻿@{
+    var citationBook = (CitationNeeded.Domain.ValueTypes.CitationBook) ViewData["CitationBook"];
+}
+
+@foreach (var citationGroup in citationBook.CitationGroups)
+{
+    <div>
+        <p>Author: @citationGroup.Author</p>
+        <p>Created: @citationGroup.Created</p>
+        
+        @foreach(var citation in citationGroup.Citations)
+        {
+            <p>@citation.Speaker: @citation.Text</p>
+        }
+    </div>
+}

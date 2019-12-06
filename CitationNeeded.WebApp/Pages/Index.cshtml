@@ -13,7 +13,7 @@ else
     <aside id="sidebar" class="d-md-block d-none">
         @foreach (var book in Model.CitationBooks)
         {
-            <div class="book-outline">
+            <div class="book-outline" data-citationbook-id="@book.Id">
                 <div class="book w-100">
                     <p class="title">@book.Name</p>
                     <p class="date">@Model.GetLatestDate(book).ToString("d")</p>
@@ -38,22 +38,39 @@ else
             </form>
         </div>
     </aside>
+
+    <div id="js_content">
+
+    </div>
 }
 
 @section Scripts 
 {
     <script>
-        $("#js_newbookplus").click(function () {
-            $(this).addClass("d-none");
-            $("#js_newbookinput").removeClass("d-none");
+        $(function () {
+            $("#js_newbookplus").click(function () {
+                $(this).addClass("d-none");
+                $("#js_newbookinput").removeClass("d-none");
+            });
         });
     </script>
 
     <script>
-        $("#js_createBookButton").click(function (e) {
-            if ($("#js_createBookInput").val().length < 1) {
-                e.preventDefault();
-            }
+        $(function () {
+            $("#js_createBookButton").click(function (e) {
+                if ($("#js_createBookInput").val().length < 1) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $(".book-outline").click(function () {
+                var citationBookId = $(this).data("citationbook-id");
+                $('#js_content').load('?handler=CitationBookPartial&citationBookId=' + citationBookId);
+            });
         });
     </script>
 }
