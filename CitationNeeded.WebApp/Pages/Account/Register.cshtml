@@ -14,22 +14,22 @@
             <div class="form-group">
                 <label asp-for="FirstName">Vorname: </label>
                 <input class="form-control" asp-for="FirstName" />
-                <span asp-validation-for="FirstName"></span>
+                <span asp-validation-for="FirstName">Inkorrekte Eingabe</span>
             </div>
             <div class="form-group">
                 <label asp-for="LastName">Nachname: </label>
                 <input class="form-control" asp-for="LastName" />
-                <span asp-validation-for="LastName"></span>
+                <span asp-validation-for="LastName">Inkorrekte Eingabe</span>
             </div>
             <div class="form-group">
                 <label asp-for="Password">Passwort: </label>
                 <input class="form-control" asp-for="Password" />
-                <span asp-validation-for="Password"></span>
+                <span asp-validation-for="Password">Inkorrekte Eingabe</span>
             </div>
             <div class="form-group">
                 <label asp-for="Email">E-Mail: </label>
                 <input class="form-control" asp-for="Email" />
-                <span asp-validation-for="Email"></span>
+                <span asp-validation-for="Email">Inkorrekte Eingabe</span>
             </div>
             <button type="submit" class="btn btn-primary startupBtn">Registrieren</button>
         </form>

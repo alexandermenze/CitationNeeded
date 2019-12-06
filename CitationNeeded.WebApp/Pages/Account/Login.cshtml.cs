@@ -45,14 +45,14 @@ namespace CitationNeeded.WebApp.Pages.Account
 
             if(!await _credentialVerifier.VerifyAsync(credentials))
             {
-                ModelState.AddModelError(nameof(Email), "Invalid credentials");
-                ModelState.AddModelError(nameof(Password), "Invalid credentials");
+                ModelState.AddModelError(nameof(Email), string.Empty);
+                ModelState.AddModelError(nameof(Password), string.Empty);
                 return Page();
             }
 
             if(!await _identityService.CheckEmailVerified(Email))
             {
-                ModelState.AddModelError(nameof(Email), "Email is not verified!");
+                ModelState.AddModelError(nameof(Email), string.Empty);
                 return Page();
             }
 
@@ -63,7 +63,7 @@ namespace CitationNeeded.WebApp.Pages.Account
 
         private Domain.ValueTypes.Account GetAccount(string email)
         {
-            return _citationContext.Accounts.Single(a => string.CompareOrdinal(a.Email, email) == 0);
+            return _citationContext.Accounts.Single(a => a.Email == email);
         }
     }
 }
