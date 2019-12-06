@@ -63,7 +63,7 @@ namespace CitationNeeded.WebApp.Pages.Account
 
         private Domain.ValueTypes.Account GetAccount(string email)
         {
-            return _citationContext.Accounts.Single(a => a.Email == Email);
+            return _citationContext.Accounts.Single(a => a.Email == email);
         }
     }
 }
