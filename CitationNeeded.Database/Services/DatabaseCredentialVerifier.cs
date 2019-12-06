@@ -8,10 +8,10 @@ namespace CitationNeeded.Database.Services
 {
     public class DatabaseCredentialVerifier : ICredentialVerifier
     {
-        private readonly AccountContext _accountContext;
+        private readonly CitationContext _accountContext;
         private readonly IHashService _hashService;
 
-        public DatabaseCredentialVerifier(AccountContext dbContext, IHashService secureHashService)
+        public DatabaseCredentialVerifier(CitationContext dbContext, IHashService secureHashService)
         {
             _accountContext = dbContext;
             _hashService = secureHashService;

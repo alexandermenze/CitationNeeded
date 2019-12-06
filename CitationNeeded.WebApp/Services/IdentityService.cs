@@ -19,12 +19,12 @@ namespace CitationNeeded.WebApp.Services
         private const string LastNameClaimType = "LastName";
 
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly AccountContext _accountContext;
+        private readonly CitationContext _citationContext;
 
-        public IdentityService(IHttpContextAccessor httpContextAccessor, AccountContext accountContext)
+        public IdentityService(IHttpContextAccessor httpContextAccessor, CitationContext citationContext)
         {
             _httpContextAccessor = httpContextAccessor;
-            _accountContext = accountContext;
+            _citationContext = citationContext;
         }
 
         public Account GetIdentity()
@@ -66,7 +66,7 @@ namespace CitationNeeded.WebApp.Services
 
         public async Task<bool> CheckEmailVerified(string email)
         {
-            var verifications = await _accountContext
+            var verifications = await _citationContext
                 .AccountVerifications
                 .Where(a => string.CompareOrdinal(a.Account.Email, email) == 0)
                 .ToListAsync();

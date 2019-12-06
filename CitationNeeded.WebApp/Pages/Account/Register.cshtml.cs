@@ -15,7 +15,7 @@ namespace CitationNeeded.WebApp.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly RNGCryptoServiceProvider _cryptoService = new RNGCryptoServiceProvider();
-        private readonly AccountContext _accountContext;
+        private readonly CitationContext _citationContext;
         private readonly IHashService _hashService;
         private readonly IEmailService _emailService;
 
@@ -35,9 +35,9 @@ namespace CitationNeeded.WebApp.Pages.Account
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        public RegisterModel(AccountContext accountContext, IHashService hashService, IEmailService emailService)
+        public RegisterModel(CitationContext citationContext, IHashService hashService, IEmailService emailService)
         {
-            _accountContext = accountContext;
+            _citationContext = citationContext;
             _hashService = hashService;
             _emailService = emailService;
         }
@@ -79,7 +79,7 @@ namespace CitationNeeded.WebApp.Pages.Account
                 return false;
             }
 
-            if (_accountContext.Accounts.Any(a => string.Compare(a.Email, Email) == 0))
+            if (_citationContext.Accounts.Any(a => a.Email.ToUpperInvariant() == Email.ToUpperInvariant()))
             {
                 ModelState.AddModelError(nameof(Email), "Email already taken!");
                 return false;
@@ -98,8 +98,8 @@ namespace CitationNeeded.WebApp.Pages.Account
                 HashedPassword = _hashService.Hash(Password)
             };
 
-            _accountContext.Accounts.Add(account);
-            await _accountContext.SaveChangesAsync();
+            _citationContext.Accounts.Add(account);
+            await _citationContext.SaveChangesAsync();
 
             return account;
         }
@@ -111,7 +111,7 @@ namespace CitationNeeded.WebApp.Pages.Account
             var token = GenerateToken();
             var tokenUrl = QueryHelpers.AddQueryString($"{requestUrl}/Account/Verify", "token", token);
 
-            _accountContext.AccountVerifications.Add(new AccountVerification
+            _citationContext.AccountVerifications.Add(new AccountVerification
             {
                 Account = account,
                 IsVerified = false,
@@ -126,7 +126,7 @@ namespace CitationNeeded.WebApp.Pages.Account
                 Content = $"Your verfication link: \n<a href=\"{tokenUrl}\">{tokenUrl}</a>"
             });
             
-            await _accountContext.SaveChangesAsync();
+            await _citationContext.SaveChangesAsync();
         }
 
         private string GenerateToken()
