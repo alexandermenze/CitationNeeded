@@ -60,7 +60,7 @@ namespace CitationNeeded.WebApp.Pages
 
             await _citationContext.SaveChangesAsync();
 
-            return Page();
+            return RedirectToPage("/Index");
         }
 
         [NonHandler]
