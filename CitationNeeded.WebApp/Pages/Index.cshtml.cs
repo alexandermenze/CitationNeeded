@@ -5,6 +5,7 @@ using CitationNeeded.Domain.ValueTypes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,26 @@ namespace CitationNeeded.WebApp.Pages
             await _citationContext.SaveChangesAsync();
 
             return RedirectToPage("/Index");
+        }
+
+        public async Task<IActionResult> OnGetCitationBookPartial(string citationBookId)
+        {
+            var citationBook = await _citationContext.CitationBooks
+                .Include(b => b.CitationGroups)
+                .ThenInclude(c => c.Citations)
+                .SingleOrDefaultAsync(b => b.Id == citationBookId);
+
+            if (citationBook == null)
+                return Partial("_EmptyPartial");
+
+            var result = new PartialViewResult
+            {
+                ViewName = "_CitationBookPartial",
+                ViewData = new ViewDataDictionary(ViewData)
+            };
+            result.ViewData["CitationBook"] = citationBook;
+
+            return result;
         }
 
         [NonHandler]
