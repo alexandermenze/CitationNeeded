@@ -26,6 +26,7 @@ namespace CitationNeeded.WebApp.Pages.Account
         [Required]
         public string LastName { get; set; }
         [BindProperty]
+        [StringLength(maximumLength: 100, MinimumLength = 6)]
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }

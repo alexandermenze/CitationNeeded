@@ -19,6 +19,9 @@ namespace CitationNeeded.Database.Services
 
         public async Task<bool> VerifyAsync(Credentials credentials)
         {
+            if (string.IsNullOrEmpty(credentials.Email) || string.IsNullOrEmpty(credentials.Password))
+                return false;
+
             var user = await _accountContext.Accounts.SingleOrDefaultAsync(u => u.Email.Equals(credentials.Email))
                 .ConfigureAwait(false);
 

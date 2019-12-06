@@ -1,39 +1,39 @@
-﻿using CitationNeeded.Domain.Exceptions;
+﻿using CitationNeeded.Database.Database;
+using CitationNeeded.Domain.Exceptions;
 using CitationNeeded.Domain.Interfaces;
 using CitationNeeded.Domain.ValueTypes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CitationNeeded.WebApp.Pages
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly IIdentityService _identityService;
-        private readonly IEmailService _emailService;
+        private readonly CitationContext _citationContext;
 
         public Domain.ValueTypes.Account Account { get; set; }
+        public IEnumerable<CitationBook> CitationBooks { get; set; }
 
-        public IndexModel(IIdentityService identityService, IEmailService emailService)
+        public IndexModel(IIdentityService identityService, CitationContext citationContext)
         {
             _identityService = identityService;
-            _emailService = emailService;
+            _citationContext = citationContext;
         }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
             try
             {
                 Account = _identityService.GetIdentity();
-                await _emailService.SendAsync(new Email
-                {
-                    From = "test@alexandermenze.de",
-                    To = Account.Email,
-                    Subject = "alexandermenze.de: Email verification code",
-                    Content = "Your code is 12345!"
-                });
+                CitationBooks = _citationContext.CitationBooks.ToList();
             }
-            catch (IdentityException)
+            catch (IdentityException ex)
             {
+                // Todo
             }
         }
     }
