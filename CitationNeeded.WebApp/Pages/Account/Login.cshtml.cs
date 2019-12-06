@@ -13,7 +13,7 @@ namespace CitationNeeded.WebApp.Pages.Account
     {
         private readonly ICredentialVerifier _credentialVerifier;
         private readonly IIdentityService _identityService;
-        private readonly AccountContext _accountContext;
+        private readonly CitationContext _citationContext;
 
         [BindProperty]
         [Required]
@@ -24,11 +24,11 @@ namespace CitationNeeded.WebApp.Pages.Account
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public LoginModel(AccountContext accountContext, ICredentialVerifier credentialVerifier, IIdentityService identityService)
+        public LoginModel(CitationContext citationContext, ICredentialVerifier credentialVerifier, IIdentityService identityService)
         {
             _credentialVerifier = credentialVerifier;
             _identityService = identityService;
-            _accountContext = accountContext;
+            _citationContext = citationContext;
         }
 
         public IActionResult OnGet()
@@ -63,7 +63,7 @@ namespace CitationNeeded.WebApp.Pages.Account
 
         private Domain.ValueTypes.Account GetAccount(string email)
         {
-            return _accountContext.Accounts.Single(a => string.CompareOrdinal(a.Email, email) == 0);
+            return _citationContext.Accounts.Single(a => string.CompareOrdinal(a.Email, email) == 0);
         }
     }
 }

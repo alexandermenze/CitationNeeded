@@ -37,18 +37,11 @@ namespace CitationNeeded.WebApp
                 services.AddDbContext<CitationContext>(
                     o => o.UseSqlite("Filename=Citations.db"));
 
-                services.AddDbContext<AccountContext>(
-                    o => o.UseSqlite("Filename=Accounts.db"));
-
                 services.AddSingleton<IEmailService, ConsoleEmailService>();
             }
             else
             {
                 services.AddDbContext<CitationContext>(
-                    o => o.UseMySql(Configuration[connectionStringKey],
-                    mo => mo.MigrationsAssembly("CitationNeeded.Database")));
-
-                services.AddDbContext<AccountContext>(
                     o => o.UseMySql(Configuration[connectionStringKey],
                     mo => mo.MigrationsAssembly("CitationNeeded.Database")));
 
@@ -68,17 +61,16 @@ namespace CitationNeeded.WebApp
 
         public void Configure(IApplicationBuilder app, 
             IHostingEnvironment env,
-            AccountContext accountContext,
             CitationContext citationContext)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                SetupDev(accountContext, citationContext);
+                SetupDev(citationContext);
             }
             else
             {
-                UpdateDatabase(accountContext, citationContext);
+                UpdateDatabase(citationContext);
             }
 
             app.UseStaticFiles();
@@ -91,16 +83,17 @@ namespace CitationNeeded.WebApp
             app.UseMvc();
         }
 
-        private void UpdateDatabase(AccountContext accountContext, CitationContext citationContext)
+        private void UpdateDatabase(CitationContext citationContext)
         {
-            accountContext.Database.Migrate();
             citationContext.Database.Migrate();
         }
 
-        private void SetupDev(AccountContext accountContext, CitationContext citationContext)
+        private void SetupDev(CitationContext citationContext)
         {
-            accountContext.Database.EnsureCreated();
-            citationContext.Database.EnsureCreated();
+            if (citationContext.Database.EnsureCreated())
+            {
+                TestData.Setup(citationContext);
+            }
         }
     }
 }

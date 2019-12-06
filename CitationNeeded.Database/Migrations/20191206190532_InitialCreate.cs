@@ -8,6 +8,21 @@ namespace CitationNeeded.Database.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Accounts",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    HashedPassword = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CitationBooks",
                 columns: table => new
                 {
@@ -20,15 +35,23 @@ namespace CitationNeeded.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "AccountVerifications",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    AccountId = table.Column<string>(nullable: true),
+                    VerificationToken = table.Column<string>(nullable: true),
+                    IsVerified = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_AccountVerifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AccountVerifications_Accounts_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Accounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,9 +67,9 @@ namespace CitationNeeded.Database.Migrations
                 {
                     table.PrimaryKey("PK_CitationGroup", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CitationGroup_User_AuthorId",
+                        name: "FK_CitationGroup_Accounts_AuthorId",
                         column: x => x.AuthorId,
-                        principalTable: "User",
+                        principalTable: "Accounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -62,7 +85,7 @@ namespace CitationNeeded.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    SpeakerId = table.Column<string>(nullable: true),
+                    Speaker = table.Column<string>(nullable: true),
                     Text = table.Column<string>(nullable: true),
                     CitationGroupId = table.Column<string>(nullable: true)
                 },
@@ -75,23 +98,17 @@ namespace CitationNeeded.Database.Migrations
                         principalTable: "CitationGroup",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Citation_User_SpeakerId",
-                        column: x => x.SpeakerId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccountVerifications_AccountId",
+                table: "AccountVerifications",
+                column: "AccountId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Citation_CitationGroupId",
                 table: "Citation",
                 column: "CitationGroupId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Citation_SpeakerId",
-                table: "Citation",
-                column: "SpeakerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CitationGroup_AuthorId",
@@ -107,13 +124,16 @@ namespace CitationNeeded.Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AccountVerifications");
+
+            migrationBuilder.DropTable(
                 name: "Citation");
 
             migrationBuilder.DropTable(
                 name: "CitationGroup");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Accounts");
 
             migrationBuilder.DropTable(
                 name: "CitationBooks");

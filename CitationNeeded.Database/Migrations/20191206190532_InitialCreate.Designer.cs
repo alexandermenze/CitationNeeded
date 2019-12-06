@@ -9,15 +9,50 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CitationNeeded.Database.Migrations
 {
     [DbContext(typeof(CitationContext))]
-    [Migration("20190916093108_InitialCreate")]
+    [Migration("20191206190532_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+
+            modelBuilder.Entity("CitationNeeded.Domain.ValueTypes.Account", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("HashedPassword");
+
+                    b.Property<string>("LastName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("CitationNeeded.Domain.ValueTypes.AccountVerification", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AccountId");
+
+                    b.Property<bool>("IsVerified");
+
+                    b.Property<string>("VerificationToken");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("AccountVerifications");
+                });
 
             modelBuilder.Entity("CitationNeeded.Domain.ValueTypes.Citation", b =>
                 {
@@ -26,15 +61,13 @@ namespace CitationNeeded.Database.Migrations
 
                     b.Property<string>("CitationGroupId");
 
-                    b.Property<string>("SpeakerId");
+                    b.Property<string>("Speaker");
 
                     b.Property<string>("Text");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CitationGroupId");
-
-                    b.HasIndex("SpeakerId");
 
                     b.ToTable("Citation");
                 });
@@ -71,16 +104,11 @@ namespace CitationNeeded.Database.Migrations
                     b.ToTable("CitationGroup");
                 });
 
-            modelBuilder.Entity("CitationNeeded.Domain.ValueTypes.User", b =>
+            modelBuilder.Entity("CitationNeeded.Domain.ValueTypes.AccountVerification", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
+                    b.HasOne("CitationNeeded.Domain.ValueTypes.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId");
                 });
 
             modelBuilder.Entity("CitationNeeded.Domain.ValueTypes.Citation", b =>
@@ -88,15 +116,11 @@ namespace CitationNeeded.Database.Migrations
                     b.HasOne("CitationNeeded.Domain.ValueTypes.CitationGroup")
                         .WithMany("Citations")
                         .HasForeignKey("CitationGroupId");
-
-                    b.HasOne("CitationNeeded.Domain.ValueTypes.User", "Speaker")
-                        .WithMany()
-                        .HasForeignKey("SpeakerId");
                 });
 
             modelBuilder.Entity("CitationNeeded.Domain.ValueTypes.CitationGroup", b =>
                 {
-                    b.HasOne("CitationNeeded.Domain.ValueTypes.User", "Author")
+                    b.HasOne("CitationNeeded.Domain.ValueTypes.Account", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
 

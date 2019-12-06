@@ -1,17 +1,37 @@
 ﻿@page
 @model CitationNeeded.WebApp.Pages.IndexModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "CitationNeeded";
 }
 
-<h1>Index</h1>
-
-@if(Model.Account == null)
+@if (Model.Account == null)
 {
     <p>You are not logged in!</p>
 }
 else
 {
-    <p>Welcome, @Model.Account.FirstName!</p>
+    <aside id="sidebar" class="d-md-block d-none">
+        <div class="book-outline">
+            <div class="book">
+                <p class="title">Zitatbuch1</p>
+                <p class="date">06.12.2019</p>
+            </div>
+        </div>
+        <div class="book-outline">
+            <div class="book">
+                <p class="title">Zitatbuch1</p>
+                <p class="date">06.12.2019</p>
+            </div>
+        </div>
+        <div class="book-outline new">
+            <div class="book new">
+                <span class="plus">+</span>
+            </div>
+        </div>
+    </aside>
 }
 
+@foreach(var book in Model.CitationBooks)
+{
+<p>@book.CitationGroups</p>
+}
