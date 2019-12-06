@@ -4,12 +4,15 @@
 
     .book-outline {
         display: flex;
-        justify-content: flex-start;
-        align-items: stretch;
         padding: 0 18px;
         cursor: pointer;
         color: $grey-text;
         margin-top: 1px;
+
+        new {
+            border: 1px dashed $green;
+            border-radius: 5px;
+        }
 
         .book {
             border-bottom: 1px solid $grey-border;
