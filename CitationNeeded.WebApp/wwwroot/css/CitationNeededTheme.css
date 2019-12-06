@@ -104,3 +104,6 @@ body {
     border-radius: 0;
     box-shadow: none;
     width: 100%; } }
+
+.field-validation-valid {
+  display: none; }
