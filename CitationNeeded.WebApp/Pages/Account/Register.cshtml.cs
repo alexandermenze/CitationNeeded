@@ -50,7 +50,7 @@ namespace CitationNeeded.WebApp.Pages.Account
             var account = await RegisterAccountAsync();
             await SendRegisterEmailAsync(account);
 
-            return RedirectToPage("/Account/Login");
+            return RedirectToPage("/Account/Verification");
         }
 
         private bool ValidateInput()
