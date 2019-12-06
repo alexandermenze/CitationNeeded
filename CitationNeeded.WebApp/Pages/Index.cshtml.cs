@@ -3,9 +3,11 @@ using CitationNeeded.Domain.Exceptions;
 using CitationNeeded.Domain.Interfaces;
 using CitationNeeded.Domain.ValueTypes;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace CitationNeeded.WebApp.Pages
 {
@@ -24,17 +26,23 @@ namespace CitationNeeded.WebApp.Pages
             _citationContext = citationContext;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             try
             {
                 Account = _identityService.GetIdentity();
-                CitationBooks = _citationContext.CitationBooks.ToList();
+                CitationBooks = await _citationContext
+                    .CitationBooks
+                    .Include(b => b.CitationGroups)
+                    .ThenInclude(c => c.Citations)
+                    .ToListAsync();
             }
             catch (IdentityException ex)
             {
                 // Todo
             }
+
+            return Page();
         }
     }
 }
