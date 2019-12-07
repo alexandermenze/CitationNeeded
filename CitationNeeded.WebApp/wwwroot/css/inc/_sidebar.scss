@@ -1,13 +1,16 @@
 ﻿#sidebar {
-    grid-area: sidebar;
+    grid-area: content;
     border-right: 1px solid $grey-border;
+
+    > .book-outline + .book-outline {
+        margin-top: 1px;
+    }
 
     .book-outline {
         display: flex;
         padding: 0 18px;
         cursor: pointer;
         color: $grey-text;
-        margin-top: 1px;
 
         .book {
             border-bottom: 1px solid $grey-border;
@@ -58,4 +61,15 @@
             }
         }
     }
+}
+
+@media (min-width: 768px) {
+    #sidebar {
+        grid-area: sidebar;
+    }
+}
+
+#js_sidebarTrigger {
+    position: sticky;
+    top: 0;
 }
