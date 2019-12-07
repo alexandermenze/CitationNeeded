@@ -6,7 +6,17 @@
 
 @if (Model.Account == null)
 {
-    <p>You are not logged in!</p>
+    <div class="fill-screen">
+        <div class="jumbotron h-100 mb-0">
+            <h1 class="display-4">Huch!</h1>
+            <p class="lead">Da hat wohl etwas nicht geklappt.</p>
+            <hr class="my-4">
+            <p>Fehlercode: 1337</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="Index" role="button">Erneut versuchen</a>
+            </p>
+        </div>
+    </div>
 }
 else
 {
@@ -31,20 +41,24 @@ else
             </div>
         }
 
-        <div id="js_newbookplus" class="book-outline__new">
+        <div id="js_newbookplus" class="book-outline__new mt-3">
             <div class="book__new w-100">
                 <i class="plus-icon__new fas fa-plus"></i>
             </div>
         </div>
 
-        <div id="js_newbookinput" class="d-none">
-            <form method="post">
-                <div class="form-group">
-                    <label asp-for="CreateBookName">Name: </label>
-                    <input id="js_createBookInput" class="form-control" asp-for="CreateBookName" />
-                    <span asp-validation-for="CreateBookName" class="text-danger"></span>
+        <div id="js_newbookinput" class="d-none book-outline__new mt-3">
+            <form method="post" class="w-100">
+                <input id="js_createBookInput" type="text" class="form-control mb-3" placeholder="Buchname" asp-for="CreateBookName" />
+                <span asp-validation-for="CreateBookName" class="text-danger"></span>
+                <div class="buttonpanel">
+                    <button id="js_createBookCancelButton" class="btn btn-secondary" type="button">
+                        Abbrechen
+                    </button>
+                    <button id="js_createBookButton" type="submit" class="btn btn-primary" asp-page-handler="CreateBook">
+                        Anlegen
+                    </button>
                 </div>
-                <button id="js_createBookButton" type="submit" class="btn btn-primary startupBtn" asp-page-handler="CreateBook">Submits</button>
             </form>
         </div>
     </aside>
@@ -54,13 +68,22 @@ else
     </div>
 }
 
-@section Scripts 
+@section Scripts
 {
     <script>
         $(function () {
             $("#js_newbookplus").click(function () {
                 $(this).addClass("d-none");
                 $("#js_newbookinput").removeClass("d-none");
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $("#js_createBookCancelButton").click(function () {
+                $("#js_newbookinput").addClass("d-none");
+                $("#js_newbookplus").removeClass("d-none");
             });
         });
     </script>

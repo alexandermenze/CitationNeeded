@@ -23,6 +23,14 @@ body {
   grid-area: content;
   padding: 20px; }
 
+.buttonpanel {
+  display: flex;
+  justify-content: space-between; }
+
+.fill-screen {
+  grid-area: content;
+  grid-column: span 2; }
+
 #navigation {
   grid-area: navigation; }
   #navigation.bg-light {
@@ -75,8 +83,7 @@ body {
         color: white; }
   #sidebar .book-outline__new {
     display: flex;
-    padding: 0 18px;
-    margin-top: 1rem; }
+    padding: 0 18px; }
     #sidebar .book-outline__new .book__new {
       display: flex;
       justify-content: center;
