@@ -77,6 +77,9 @@ body {
     cursor: pointer;
     color: #4a4a4a; }
     #sidebar .book-outline .book {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       border-bottom: 1px solid #ececec;
       margin-bottom: -1px; }
       #sidebar .book-outline .book .title {
@@ -86,6 +89,8 @@ body {
       #sidebar .book-outline .book .date {
         font-size: 12px;
         color: #878787; }
+      #sidebar .book-outline .book .btn-delete {
+        color: white; }
     #sidebar .book-outline:hover {
       background-color: #32a852;
       color: white; }
@@ -131,8 +136,11 @@ body {
       color: #32a852; }
     #content .citationGroup .list-group-item:nth-child(even) {
       text-align: right; }
-    #content .citationGroup .author {
-      color: #26813f; }
+    #content .citationGroup .card-footer {
+      display: flex;
+      justify-content: space-between; }
+      #content .citationGroup .card-footer .author {
+        color: #26813f; }
   @media (max-width: 768px) {
     #content #js_content {
       max-width: unset;
@@ -160,6 +168,10 @@ button:focus {
   .btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:focus {
     background-color: #26813f;
     border-color: #26813f; }
+
+.btn-delete:hover {
+  background-color: #dc3545;
+  border-color: #dc3545; }
 
 a {
   color: #32a852; }

@@ -24,6 +24,11 @@ button:focus {
     }
 }
 
+.btn-delete:hover {
+    background-color: $red;
+    border-color: $red;
+}
+
 //Links
 a {
     color: $green;

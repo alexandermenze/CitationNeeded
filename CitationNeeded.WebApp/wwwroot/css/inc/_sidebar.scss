@@ -15,6 +15,9 @@
         color: $grey-text;
 
         .book {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid $grey-border;
             margin-bottom: -1px;
 
@@ -27,6 +30,10 @@
             .date {
                 font-size: $small-text-size;
                 color: $grey-text-light;
+            }
+
+            .btn-delete {
+                color: white;
             }
         }
 
