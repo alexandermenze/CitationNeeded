@@ -20,7 +20,7 @@
 }
 else
 {
-    <aside id="sidebar" class="z-100">
+    <aside id="sidebar" class="z-20">
         @foreach (var book in Model.CitationBooks)
         {
             <div class="book-outline" data-citationbook-id="@book.Id">
@@ -53,8 +53,8 @@ else
         </div>
     </aside>
 
-    <div id="content">
-        <button id="js_sidebarTrigger" type="button" class="btn d-md-none">
+    <div id="content" class="py-3">
+        <button id="js_sidebarTrigger" type="button" class="btn d-md-none z-10">
             <i class="fas fa-bars fa-lg"></i>
         </button>
 
@@ -99,7 +99,7 @@ else
             $(".book-outline").click(function () {
                 var citationBookId = $(this).data("citationbook-id");
                 $('#js_content').load('?handler=CitationBookPartial&citationBookId=' + citationBookId);
-                $("#sidebar").removeClass("z-100");
+                $("#sidebar").removeClass("z-20");
             });
         });
     </script>
@@ -107,7 +107,7 @@ else
     <script>
         $(function () {
             $("#js_sidebarTrigger").click(function () {
-                $("#sidebar").addClass("z-100");
+                $("#sidebar").addClass("z-20");
             })
         })
     </script>
