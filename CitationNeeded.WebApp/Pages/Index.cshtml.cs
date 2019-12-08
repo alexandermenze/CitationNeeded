@@ -54,7 +54,7 @@ namespace CitationNeeded.WebApp.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostCreateBookAsync()
+        public async Task<IActionResult> OnPostCreateBookAsync(string citationBookId)
         {
             _citationContext.CitationBooks.Add(
                 new CitationBook { Name = CreateBookName });
@@ -82,6 +82,16 @@ namespace CitationNeeded.WebApp.Pages
             result.ViewData["CitationBook"] = citationBook;
 
             return result;
+        }
+
+        public async Task<IActionResult> OnPostCreateCitationGroupAsync()
+        {
+            _citationContext.CitationBooks.Add(
+                new CitationBook { Name = CreateBookName });
+
+            await _citationContext.SaveChangesAsync();
+
+            return RedirectToPage("/Index");
         }
 
         [NonHandler]
