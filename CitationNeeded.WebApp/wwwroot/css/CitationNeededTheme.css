@@ -19,9 +19,19 @@ body {
     grid-template-rows: 60px 1fr;
     grid-template-areas: "navigation navigation" "sidebar content"; } }
 
-#content {
+.buttonpanel {
+  display: flex;
+  justify-content: space-between; }
+
+.fill-screen {
   grid-area: content;
-  padding: 20px; }
+  grid-column: span 2; }
+
+.z-10 {
+  z-index: 10; }
+
+.z-20 {
+  z-index: 20; }
 
 #navigation {
   grid-area: navigation; }
@@ -49,22 +59,30 @@ body {
         background-color: #FFE370; }
         #navigation #user-nav .user-icon-container .user-icon-circle .user-icon-text {
           filter: invert(100%); }
+  #navigation.navbar .dropdown-menu {
+    min-width: 0; }
+    #navigation.navbar .dropdown-menu .dropdown-item:active {
+      background-color: #32a852; }
 
 #sidebar {
-  grid-area: sidebar;
-  border-right: 1px solid #ececec; }
+  grid-area: content;
+  border-right: 1px solid #ececec;
+  overflow-y: auto;
+  background-color: #ffffff; }
+  #sidebar > .book-outline + .book-outline {
+    margin-top: 1px; }
   #sidebar .book-outline {
     display: flex;
     padding: 0 18px;
     cursor: pointer;
-    color: #4a4a4a;
-    margin-top: 1px; }
+    color: #4a4a4a; }
     #sidebar .book-outline .book {
       border-bottom: 1px solid #ececec;
       margin-bottom: -1px; }
       #sidebar .book-outline .book .title {
         margin-bottom: 0;
-        margin-top: 1rem; }
+        margin-top: 1rem;
+        word-break: break-all; }
       #sidebar .book-outline .book .date {
         font-size: 12px;
         color: #878787; }
@@ -75,8 +93,7 @@ body {
         color: white; }
   #sidebar .book-outline__new {
     display: flex;
-    padding: 0 18px;
-    margin-top: 1rem; }
+    padding: 0 18px; }
     #sidebar .book-outline__new .book__new {
       display: flex;
       justify-content: center;
@@ -86,11 +103,57 @@ body {
       border-radius: 7px;
       margin: 0;
       cursor: pointer; }
-      #sidebar .book-outline__new .book__new .fas {
+      #sidebar .book-outline__new .book__new .plus-icon__new {
         margin: 1rem 0; }
       #sidebar .book-outline__new .book__new:hover {
         background-color: #32a852;
         color: white; }
+
+@media (min-width: 768px) {
+  #sidebar {
+    grid-area: sidebar; } }
+
+#content {
+  grid-area: content;
+  overflow-y: auto;
+  background-color: #ffffff; }
+  #content #js_sidebarTrigger {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff; }
+    #content #js_sidebarTrigger .fa-bars {
+      color: #32a852; }
+  #content .citationGroup {
+    margin-bottom: 15px;
+    color: #4a4a4a; }
+    #content .citationGroup .list-group-item .speaker {
+      color: #32a852; }
+    #content .citationGroup .list-group-item:nth-child(even) {
+      text-align: right; }
+    #content .citationGroup .author {
+      color: #26813f; }
+
+.field-validation-valid {
+  display: none; }
+
+.btn {
+  box-shadow: none !important; }
+
+.btn-primary {
+  background-color: #32a852;
+  border-color: #32a852; }
+  .btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:focus {
+    background-color: #26813f;
+    border-color: #26813f; }
+
+a {
+  color: #32a852; }
+  a:hover, a:active, a:focus {
+    color: #26813f; }
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2em rgba(82, 204, 115, 0.25);
+  border-color: #52cc73; }
 
 body {
   background: #ffffff; }
@@ -122,31 +185,3 @@ body {
     border-radius: 0;
     box-shadow: none;
     width: 100%; } }
-
-.field-validation-valid {
-  display: none; }
-
-.citationGroup {
-  margin-bottom: 15px;
-  color: #4a4a4a;
-  background: green; }
-  .citationGroup .card-title {
-    color: #32a852; }
-  .citationGroup h5, .citationGroup h6 {
-    margin-left: 5px; }
-  .citationGroup .list-group-item .speaker {
-    color: #32a852; }
-  .citationGroup .list-group-item:nth-child(even) {
-    text-align: right; }
-  .citationGroup .list-group-item:nth-child(odd) {
-    background: #f8f8f8; }
-  @media (min-width: 768px) {
-    .citationGroup {
-      margin: 15px; } }
-  @media (max-width: 768px) {
-    .citationGroup {
-      border-radius: 0px;
-      border-left: none;
-      border-right: none; }
-      .citationGroup .list-group:last-child .list-group-item:last-child {
-        border-radius: 0px; } }

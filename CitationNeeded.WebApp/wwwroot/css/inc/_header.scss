@@ -37,4 +37,12 @@
             }
         }
     }
+
+    &.navbar .dropdown-menu {
+        min-width: 0;
+
+        .dropdown-item:active {
+            background-color: $green;
+        }
+    }
 }

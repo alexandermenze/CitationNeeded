@@ -21,7 +21,20 @@
     }
 }
 
-#content {
+.buttonpanel {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fill-screen {
     grid-area: content;
-    padding: 20px;
+    grid-column: span 2;
+}
+
+.z-10 {
+    z-index: 10;
+}
+
+.z-20 {
+    z-index: 20;
 }

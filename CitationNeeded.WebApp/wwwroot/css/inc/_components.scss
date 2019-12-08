@@ -1,0 +1,37 @@
+﻿//Messages
+.field-validation-valid {
+    display: none;
+}
+
+//Buttons
+.btn {
+    box-shadow: none !important;
+}
+.btn-primary {
+    background-color: $green;
+    border-color: $green;
+
+    &:hover,
+    &:not(:disabled):not(.disabled):active,
+    &:focus {
+        background-color: $green__darker;
+        border-color: $green__darker;
+    }
+}
+
+//Links
+a {
+    color: $green;
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $green__darker;
+    }
+}
+
+//Input
+.form-control:focus {
+    box-shadow: $box-shadow $green__transparent;
+    border-color: $green__lighter;
+}

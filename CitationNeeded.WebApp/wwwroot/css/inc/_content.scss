@@ -1,42 +1,35 @@
-﻿.citationGroup {
-    margin-bottom: 15px;
-    color: $grey-text;
-    background: green;
+﻿#content {
+    grid-area: content;
+    overflow-y: auto;
+    background-color: $white-bg;
 
-    .card-title {
-        color: $green;
-    }
+    #js_sidebarTrigger {
+        position: sticky;
+        top: 0;
+        background-color: $white-bg;
 
-    h5, h6 {
-        margin-left: 5px;
-    }
-
-    .list-group-item {
-
-        .speaker {
+        .fa-bars {
             color: $green;
         }
-
-        &:nth-child(even) {
-            text-align: right;
-        }
-
-        &:nth-child(odd) {
-            background: $grey-bg;
-        }
     }
 
-    @media (min-width: 768px) {
-        margin: 15px;
-    }
+    .citationGroup {
+        margin-bottom: 15px;
+        color: $grey-text;
 
-    @media (max-width: 768px) {
-        border-radius: 0px;
-        border-left: none;
-        border-right: none;
+        .list-group-item {
 
-        .list-group:last-child .list-group-item:last-child {
-            border-radius: 0px;
+            .speaker {
+                color: $green;
+            }
+
+            &:nth-child(even) {
+                text-align: right;
+            }
+        }
+
+        .author {
+            color: $green__darker;
         }
     }
 }
