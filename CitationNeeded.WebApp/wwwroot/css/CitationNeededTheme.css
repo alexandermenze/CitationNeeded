@@ -77,6 +77,9 @@ body {
     cursor: pointer;
     color: #4a4a4a; }
     #sidebar .book-outline .book {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       border-bottom: 1px solid #ececec;
       margin-bottom: -1px; }
       #sidebar .book-outline .book .title {
@@ -86,6 +89,8 @@ body {
       #sidebar .book-outline .book .date {
         font-size: 12px;
         color: #878787; }
+      #sidebar .book-outline .book .btn-delete-group {
+        color: white; }
     #sidebar .book-outline:hover {
       background-color: #32a852;
       color: white; }
