@@ -141,6 +141,28 @@ namespace CitationNeeded.WebApp.Pages
             return Redirect($"/Index?citationBookId={citationBookId}");
         }
 
+        public async Task<IActionResult> OnPostDeleteBookAsync(string citationBookId)
+        {
+            if (string.IsNullOrEmpty(citationBookId))
+                return Redirect($"/Index?citationBookId={citationBookId}");
+
+            var citationBook = await _citationContext
+                .CitationBooks
+                .Include(b => b.CitationGroups)
+                .SingleOrDefaultAsync(b => b.Id == citationBookId);
+
+            if (citationBook == null)
+                return Redirect($"/Index?citationBookId={citationBookId}");
+
+            citationBook.CitationGroups.Clear();
+
+            _citationContext.CitationBooks.Remove(citationBook);
+
+            await _citationContext.SaveChangesAsync();
+
+            return Redirect("/Index");
+        }
+
         [NonHandler]
         public DateTime GetLatestDate(CitationBook book)
         {

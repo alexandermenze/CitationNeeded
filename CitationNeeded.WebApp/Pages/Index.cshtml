@@ -25,6 +25,12 @@ else
         {
             <div class="book-outline" data-citationbook-id="@book.Id">
                 <div class="book w-100">
+                    <form method="post">
+                        <input type="hidden" name="citationBookId" value="@book.Id" />
+                        <button type="submit" class="btn btn-primary startupBtn" asp-page-handler="DeleteBook">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
                     <p class="title">@book.Name</p>
                     <p class="date">@Model.GetLatestDate(book).ToString("d")</p>
                 </div>
