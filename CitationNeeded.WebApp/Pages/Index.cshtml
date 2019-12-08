@@ -53,12 +53,12 @@ else
         </div>
     </aside>
 
-    <div id="content" class="py-3">
+    <div id="content" class="pt-3">
         <button id="js_sidebarTrigger" type="button" class="btn d-md-none z-10">
             <i class="fas fa-bars fa-lg"></i>
         </button>
 
-        <button id="js_createCitationGroupButton" class="fab">
+        <button id="js_createCitationGroupButton" class="fab d-none">
             +
         </button>
 
@@ -104,6 +104,7 @@ else
                 var citationBookId = $(this).data("citationbook-id");
                 $('#js_content').load('?handler=CitationBookPartial&citationBookId=' + citationBookId);
                 $("#sidebar").removeClass("z-20");
+                $("#js_createCitationGroupButton").removeClass("d-none");
             });
         });
     </script>
