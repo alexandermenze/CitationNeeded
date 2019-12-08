@@ -2,27 +2,34 @@
     var citationBook = (CitationNeeded.Domain.ValueTypes.CitationBook)ViewData["CitationBook"];
 }
 
-<div id="js_createCitation" class="d-none">
-
-    <div id="js_exampleInput" class="form-group d-none">
-        <label id="js_labelTextInput_x" for="js_textInput_x">Text: </label>
-        <input id="js_textInput_x" class="form-control" name="[0].Text" />
-        <label id="js_labelSpeakerInput_x" for="js_speakerInput_x">Sprecher: </label>
-        <input id="js_speakerInput_x" class="form-control" name="[0].Speaker" />
-    </div>
-
+<div id="js_createCitation" class="card citationGroup d-none">
     <form method="post">
-        <div id="js_variableInputFields">
-            <div id="js_input_0" class="form-group">
-                <label id="js_labelTextInput_0" for="js_textInput_0">Text: </label>
-                <input id="js_textInput_0" class="form-control" name="[0].Text" />
-                <label id="js_labelSpeakerInput_0" for="js_speakerInput_0">Sprecher: </label>
-                <input id="js_speakerInput_0" class="form-control" name="[0].Speaker" />
+        <div class="card-body">
+
+            <div id="js_exampleInput" class="form-group d-none">
+                <label id="js_labelTextInput_x" for="js_textInput_x">Zitat: </label>
+                <input id="js_textInput_x" class="form-control" name="[0].Text" />
+                <label id="js_labelSpeakerInput_x" for="js_speakerInput_x">Sprecher: </label>
+                <input id="js_speakerInput_x" class="form-control" name="[0].Speaker" />
+            </div>
+
+            <div id="js_variableInputFields">
+                <div id="js_input_0" class="form-group mb-0">
+                    <label id="js_labelTextInput_0" for="js_textInput_0">Zitat: </label>
+                    <input id="js_textInput_0" class="form-control" name="[0].Text" />
+                    <label id="js_labelSpeakerInput_0" for="js_speakerInput_0">Urheber: </label>
+                    <input id="js_speakerInput_0" class="form-control" name="[0].Speaker" />
+                </div>
             </div>
         </div>
-        <i id="js_addCitation" class="fas fa-plus"></i>
-        <input type="hidden" name="citationBookId" value="@citationBook.Id" />
-        <button id="js_createCitationGroupButton" type="submit" class="btn btn-primary startupBtn" asp-page-handler="CreateCitation">Submit</button>
+
+        <div class="card-footer">
+            <button id="js_addCitation" class="btn btn-outline-secondary">
+                <i class="fas fa-plus"></i>
+            </button>
+            <input type="hidden" name="citationBookId" value="@citationBook.Id" />
+            <button id="js_createCitationGroupButton" type="submit" class="btn btn-primary startupBtn" asp-page-handler="CreateCitation">Submit</button>
+        </div>
     </form>
 </div>
 
