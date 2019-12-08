@@ -82,6 +82,7 @@ else
         }
 
         function loadCitationBook(cbId) {
+            $("#sidebar").removeClass("z-20");
             $('#js_content').load('?handler=CitationBookPartial&citationBookId=' + cbId);
         }
 
@@ -129,9 +130,8 @@ else
         $(function () {
             $(".book-outline").click(function () {
                 var citationBookId = $(this).data("citationbook-id");
-                $("#sidebar").removeClass("z-20");
-                $("#js_createCitationGroupButton").removeClass("d-none");
                 loadCitationBook(citationBookId);
+                $("#js_createCitationGroupButton").removeClass("d-none");
             });
         });
     </script>
