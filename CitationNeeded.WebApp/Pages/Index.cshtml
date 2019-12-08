@@ -31,7 +31,7 @@ else
                     </div>
                     <form method="post">
                         <input type="hidden" name="citationBookId" value="@book.Id" />
-                        <button type="submit" class="btn btn-delete-group" asp-page-handler="DeleteBook">
+                        <button type="submit" class="btn btn-delete" asp-page-handler="DeleteBook">
                             <i class="fas fa-trash"></i>
                         </button>
                     </form>
@@ -62,7 +62,7 @@ else
     </aside>
 
     <div id="content" class="pt-3">
-        <button id="js_sidebarTrigger" type="button" class="btn d-md-none z-10">
+        <button id="js_sidebarTrigger" type="button" class="btn d-md-none mb-1 z-10">
             <i class="fas fa-bars fa-lg"></i>
         </button>
 

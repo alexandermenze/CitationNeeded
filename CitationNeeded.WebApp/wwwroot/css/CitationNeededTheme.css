@@ -89,7 +89,7 @@ body {
       #sidebar .book-outline .book .date {
         font-size: 12px;
         color: #878787; }
-      #sidebar .book-outline .book .btn-delete-group {
+      #sidebar .book-outline .book .btn-delete {
         color: white; }
     #sidebar .book-outline:hover {
       background-color: #32a852;
@@ -168,6 +168,10 @@ button:focus {
   .btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:focus {
     background-color: #26813f;
     border-color: #26813f; }
+
+.btn-delete:hover {
+  background-color: #dc3545;
+  border-color: #dc3545; }
 
 a {
   color: #32a852; }
