@@ -131,8 +131,11 @@ body {
       color: #32a852; }
     #content .citationGroup .list-group-item:nth-child(even) {
       text-align: right; }
-    #content .citationGroup .author {
-      color: #26813f; }
+    #content .citationGroup .card-footer {
+      display: flex;
+      justify-content: space-between; }
+      #content .citationGroup .card-footer .author {
+        color: #26813f; }
   @media (max-width: 768px) {
     #content #js_content {
       max-width: unset;

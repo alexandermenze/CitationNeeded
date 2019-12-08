@@ -29,32 +29,34 @@
 @foreach (var citationGroup in citationBook.CitationGroups.OrderByDescending(c => c.Created))
 {
     <div class="card citationGroup">
-        <div class="card-body">
-            <form method="post">
-                <input type="hidden" name="citationGroupId" value="@citationGroup.Id" />
-                <input type="hidden" name="citationBookId" value="@citationBook.Id" />
+        <form method="post">
+            <input type="hidden" name="citationGroupId" value="@citationGroup.Id" />
+            <input type="hidden" name="citationBookId" value="@citationBook.Id" />
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    @foreach (var citation in citationGroup.Citations)
+                    {
+                        <li class="list-group-item">
+                            <div class="speaker">
+                                @citation.Speaker
+                            </div>
+                            <div class="text">
+                                @citation.Text
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="card-footer">
+                <div>
+                    <div class="author">Verfasser: @citationGroup.Author.FirstName @citationGroup.Author.LastName</div>
+                    <div class="card-subtitle text-muted">Erstellt: @citationGroup.Created</div>
+                </div>
                 <button type="submit" class="btn btn-primary startupBtn" asp-page-handler="DeleteCitation">
-                    <i class="fas fa-trash"></i>
+                    <i class="far fa-trash-alt"></i>
                 </button>
-            </form>
-            <ul class="list-group list-group-flush">
-                @foreach (var citation in citationGroup.Citations)
-                {
-                    <li class="list-group-item">
-                        <div class="speaker">
-                            @citation.Speaker
-                        </div>
-                        <div class="text">
-                            @citation.Text
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-        <div class="card-footer">
-            <div class="author">Verfasser: @citationGroup.Author.FirstName @citationGroup.Author.LastName</div>
-            <div class="card-subtitle text-muted">Erstellt: @citationGroup.Created</div>
-        </div>
+            </div>
+        </form>
     </div>
 }
 
