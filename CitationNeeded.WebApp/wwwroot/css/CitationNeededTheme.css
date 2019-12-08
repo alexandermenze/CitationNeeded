@@ -172,3 +172,31 @@ body {
     border-radius: 0;
     box-shadow: none;
     width: 100%; } }
+
+.field-validation-valid {
+  display: none; }
+
+.citationGroup {
+  margin-bottom: 15px;
+  color: #4a4a4a;
+  background: green; }
+  .citationGroup .card-title {
+    color: #32a852; }
+  .citationGroup h5, .citationGroup h6 {
+    margin-left: 5px; }
+  .citationGroup .list-group-item .speaker {
+    color: #32a852; }
+  .citationGroup .list-group-item:nth-child(even) {
+    text-align: right; }
+  .citationGroup .list-group-item:nth-child(odd) {
+    background: #f8f8f8; }
+  @media (min-width: 768px) {
+    .citationGroup {
+      margin: 15px; } }
+  @media (max-width: 768px) {
+    .citationGroup {
+      border-radius: 0px;
+      border-left: none;
+      border-right: none; }
+      .citationGroup .list-group:last-child .list-group-item:last-child {
+        border-radius: 0px; } }
