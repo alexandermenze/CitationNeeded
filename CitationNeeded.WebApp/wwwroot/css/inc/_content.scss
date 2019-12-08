@@ -6,10 +6,11 @@
     #js_sidebarTrigger {
         position: sticky;
         top: 0;
-        background-color: $white-bg;
+        background-color: $green;
+        border-radius: 0px;
 
         .fa-bars {
-            color: $green;
+            color: $white-bg;
         }
     }
 
@@ -30,6 +31,22 @@
 
         .author {
             color: $green__darker;
+        }
+    }
+
+    @media (max-width: 768px) {
+        #js_content {
+            max-width: unset;
+            margin-left: 0px;
+            margin-right: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        .citationGroup {
+            border-radius: 0px;
+            border-left: none;
+            border-right: none;
         }
     }
 }
