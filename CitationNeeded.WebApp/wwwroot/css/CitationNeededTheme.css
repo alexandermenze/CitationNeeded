@@ -120,9 +120,10 @@ body {
   #content #js_sidebarTrigger {
     position: sticky;
     top: 0;
-    background-color: #ffffff; }
+    background-color: #32a852;
+    border-radius: 0px; }
     #content #js_sidebarTrigger .fa-bars {
-      color: #32a852; }
+      color: #ffffff; }
   #content .citationGroup {
     margin-bottom: 15px;
     color: #4a4a4a; }
@@ -132,6 +133,17 @@ body {
       text-align: right; }
     #content .citationGroup .author {
       color: #26813f; }
+  @media (max-width: 768px) {
+    #content #js_content {
+      max-width: unset;
+      margin-left: 0px;
+      margin-right: 0px;
+      padding-left: 0px;
+      padding-right: 0px; }
+    #content .citationGroup {
+      border-radius: 0px;
+      border-left: none;
+      border-right: none; } }
 
 .field-validation-valid {
   display: none; }
