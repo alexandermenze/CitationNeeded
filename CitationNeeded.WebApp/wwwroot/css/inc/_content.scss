@@ -1,0 +1,10 @@
+﻿#content {
+    grid-area: content;
+    overflow: auto;
+    background-color: $white-bg;
+
+    #titlebar {
+        position: sticky;
+        top: 0;
+    }
+}

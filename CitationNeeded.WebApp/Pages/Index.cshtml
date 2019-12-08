@@ -20,7 +20,7 @@
 }
 else
 {
-    <aside id="sidebar" class="">
+    <aside id="sidebar" class="z-100">
         @foreach (var book in Model.CitationBooks)
         {
             <div class="book-outline" data-citationbook-id="@book.Id">
@@ -31,13 +31,13 @@ else
             </div>
         }
 
-        <div id="js_newbookplus" class="book-outline__new mt-3">
+        <div id="js_newbookplus" class="book-outline__new my-3">
             <div class="book__new w-100">
                 <i class="plus-icon__new fas fa-plus"></i>
             </div>
         </div>
 
-        <div id="js_newbookinput" class="d-none book-outline__new mt-3">
+        <div id="js_newbookinput" class="d-none book-outline__new my-3">
             <form method="post" class="w-100">
                 <input id="js_createBookInput" type="text" class="form-control mb-3" placeholder="Buchname" asp-for="CreateBookName" />
                 <span asp-validation-for="CreateBookName" class="text-danger"></span>
@@ -54,9 +54,11 @@ else
     </aside>
 
     <div id="content">
-        <button id="js_sidebarTrigger" type="button" class="btn btn-light d-md-none">
-            <i class="fas fa-bars"></i>
-        </button>
+        <div id="titlebar">
+            <button id="js_sidebarTrigger" type="button" class="btn btn-light d-md-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
 
         <div id="js_content" class="container">
 
@@ -99,7 +101,16 @@ else
             $(".book-outline").click(function () {
                 var citationBookId = $(this).data("citationbook-id");
                 $('#js_content').load('?handler=CitationBookPartial&citationBookId=' + citationBookId);
+                $("#sidebar").removeClass("z-100");
             });
         });
+    </script>
+
+    <script>
+        $(function () {
+            $("#js_sidebarTrigger").click(function () {
+                $("#sidebar").addClass("z-100");
+            })
+        })
     </script>
 }

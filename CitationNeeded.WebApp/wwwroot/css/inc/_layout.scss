@@ -21,10 +21,6 @@
     }
 }
 
-#content {
-    grid-area: content;
-}
-
 .buttonpanel {
     display: flex;
     justify-content: space-between;
@@ -33,4 +29,8 @@
 .fill-screen {
     grid-area: content;
     grid-column: span 2;
+}
+
+.z-100 {
+    z-index: 100;
 }

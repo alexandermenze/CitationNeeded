@@ -1,6 +1,8 @@
 ﻿#sidebar {
     grid-area: content;
     border-right: 1px solid $grey-border;
+    overflow: auto;
+    background-color: $white-bg;
 
     > .book-outline + .book-outline {
         margin-top: 1px;
@@ -67,9 +69,4 @@
     #sidebar {
         grid-area: sidebar;
     }
-}
-
-#js_sidebarTrigger {
-    position: sticky;
-    top: 0;
 }

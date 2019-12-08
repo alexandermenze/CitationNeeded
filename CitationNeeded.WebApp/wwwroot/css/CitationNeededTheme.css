@@ -19,9 +19,6 @@ body {
     grid-template-rows: 60px 1fr;
     grid-template-areas: "navigation navigation" "sidebar content"; } }
 
-#content {
-  grid-area: content; }
-
 .buttonpanel {
   display: flex;
   justify-content: space-between; }
@@ -29,6 +26,9 @@ body {
 .fill-screen {
   grid-area: content;
   grid-column: span 2; }
+
+.z-100 {
+  z-index: 100; }
 
 #navigation {
   grid-area: navigation; }
@@ -63,7 +63,9 @@ body {
 
 #sidebar {
   grid-area: content;
-  border-right: 1px solid #ececec; }
+  border-right: 1px solid #ececec;
+  overflow: auto;
+  background-color: #ffffff; }
   #sidebar > .book-outline + .book-outline {
     margin-top: 1px; }
   #sidebar .book-outline {
@@ -107,9 +109,13 @@ body {
   #sidebar {
     grid-area: sidebar; } }
 
-#js_sidebarTrigger {
-  position: sticky;
-  top: 0; }
+#content {
+  grid-area: content;
+  overflow: auto;
+  background-color: #ffffff; }
+  #content #titlebar {
+    position: sticky;
+    top: 0; }
 
 .field-validation-valid {
   display: none; }
