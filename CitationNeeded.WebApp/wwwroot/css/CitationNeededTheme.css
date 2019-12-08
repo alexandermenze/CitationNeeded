@@ -139,6 +139,9 @@ body {
 .btn {
   box-shadow: none !important; }
 
+button:focus {
+  outline: none; }
+
 .btn-primary {
   background-color: #32a852;
   border-color: #32a852; }
@@ -154,6 +157,28 @@ a {
 .form-control:focus {
   box-shadow: 0 0 0 0.2em rgba(82, 204, 115, 0.25);
   border-color: #52cc73; }
+
+.fab {
+  position: fixed;
+  z-index: 15;
+  right: 15px;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+  height: 55px;
+  border: none;
+  background-color: #32a852;
+  color: white;
+  font-size: 45px;
+  line-height: 40px;
+  border-radius: 100%;
+  box-shadow: 0 6px 10px 0 #666; }
+  @media (min-width: 768px) {
+    .fab {
+      right: 40px;
+      bottom: 40px; } }
 
 body {
   background: #ffffff; }
