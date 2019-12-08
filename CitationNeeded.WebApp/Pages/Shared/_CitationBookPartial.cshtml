@@ -30,6 +30,13 @@
 {
     <div class="card citationGroup">
         <div class="card-body">
+            <form method="post">
+                <input type="hidden" name="citationGroupId" value="@citationGroup.Id" />
+                <input type="hidden" name="citationBookId" value="@citationBook.Id" />
+                <button type="submit" class="btn btn-primary startupBtn" asp-page-handler="DeleteCitation">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>
             <ul class="list-group list-group-flush">
                 @foreach (var citation in citationGroup.Citations)
                 {
