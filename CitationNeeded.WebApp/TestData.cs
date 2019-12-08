@@ -1,6 +1,7 @@
 ﻿using CitationNeeded.Database.Database;
 using CitationNeeded.Domain.ValueTypes;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CitationNeeded.WebApp
@@ -65,7 +66,7 @@ namespace CitationNeeded.WebApp
             {
                 Id = "0",
                 Name = "TestBuch1",
-                CitationGroups = new[]
+                CitationGroups = new List<CitationGroup>
                 {
                     new CitationGroup
                     {
@@ -160,7 +161,7 @@ namespace CitationNeeded.WebApp
             {
                 Id = "1",
                 Name = "ITFA20LangerNameeeeee Yes",
-                CitationGroups = new[]
+                CitationGroups = new List<CitationGroup>
                 {
                     new CitationGroup
                     {
