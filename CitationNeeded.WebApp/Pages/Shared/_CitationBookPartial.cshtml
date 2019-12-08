@@ -5,7 +5,7 @@
 @foreach (var citationGroup in citationBook.CitationGroups)
 {
     <div class="card citationGroup">
-        <h5 class="card-title">Author: @citationGroup.Author</h5>
+        <h5 class="card-title">Author: @citationGroup.Author.FirstName @citationGroup.Author.LastName</h5>
         <h6 class="card-subtitle mb-2 text-muted">Created: @citationGroup.Created</h6>
         <ul class="list-group list-group-flush">
             @foreach (var citation in citationGroup.Citations)

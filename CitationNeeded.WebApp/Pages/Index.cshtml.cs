@@ -42,6 +42,8 @@ namespace CitationNeeded.WebApp.Pages
                 CitationBooks = await _citationContext
                     .CitationBooks
                     .Include(b => b.CitationGroups)
+                    .ThenInclude(b => b.Author)
+                    .Include(b => b.CitationGroups)
                     .ThenInclude(c => c.Citations)
                     .OrderBy(b => b.Name)
                     .ToListAsync();
@@ -67,6 +69,8 @@ namespace CitationNeeded.WebApp.Pages
         public async Task<IActionResult> OnGetCitationBookPartial(string citationBookId)
         {
             var citationBook = await _citationContext.CitationBooks
+                .Include(b => b.CitationGroups)
+                .ThenInclude(b => b.Author)
                 .Include(b => b.CitationGroups)
                 .ThenInclude(c => c.Citations)
                 .SingleOrDefaultAsync(b => b.Id == citationBookId);
