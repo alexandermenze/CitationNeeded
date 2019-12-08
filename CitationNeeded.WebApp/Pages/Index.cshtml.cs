@@ -88,6 +88,39 @@ namespace CitationNeeded.WebApp.Pages
             return result;
         }
 
+        public async Task<IActionResult> OnPostCreateCitationAsync(List<Citation> citationGroup, string citationBookId)
+        {
+            if (citationGroup == null || citationGroup.Count() == 0)
+                return Redirect($"/Index?citationBookId={citationBookId}");
+
+            var citationBook = await _citationContext
+                .CitationBooks
+                .Include(b => b.CitationGroups)
+                .SingleOrDefaultAsync(b => b.Id == citationBookId);
+
+            if (citationBook == null)
+                return Redirect($"/Index?citationBookId={citationBookId}");
+
+            var accountId = _identityService.GetIdentity().Id;
+
+            var account = await _citationContext.Accounts.SingleOrDefaultAsync(a => a.Id == accountId);
+
+            if (account == null)
+                return Redirect($"/Index?citationBookId={citationBookId}");
+
+            citationBook.CitationGroups.Add(
+                new CitationGroup
+                {
+                    Author = account,
+                    Created = DateTime.Now,
+                    Citations = citationGroup
+                });
+
+            await _citationContext.SaveChangesAsync();
+
+            return Redirect($"/Index?citationBookId={citationBookId}");
+        }
+
         [NonHandler]
         public DateTime GetLatestDate(CitationBook book)
         {

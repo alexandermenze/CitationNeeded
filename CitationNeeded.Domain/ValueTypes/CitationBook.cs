@@ -6,6 +6,6 @@ namespace CitationNeeded.Domain.ValueTypes
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<CitationGroup> CitationGroups { get; set; }
+        public List<CitationGroup> CitationGroups { get; set; }
     }
 }

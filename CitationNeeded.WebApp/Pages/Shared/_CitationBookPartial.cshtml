@@ -2,7 +2,37 @@
     var citationBook = (CitationNeeded.Domain.ValueTypes.CitationBook)ViewData["CitationBook"];
 }
 
-@foreach (var citationGroup in citationBook.CitationGroups)
+<div id="js_newCitationGroup" class="book-outline__new">
+    <div class="book__new w-100">
+        <i class="fas fa-plus"></i>
+    </div>
+</div>
+
+<div id="js_createCitation" class="d-none">
+
+    <div id="js_exampleInput" class="form-group d-none">
+        <label id="js_labelTextInput_x" for="js_textInput_x">Text: </label>
+        <input id="js_textInput_x" class="form-control" name="[0].Text" />
+        <label id="js_labelSpeakerInput_x" for="js_speakerInput_x">Sprecher: </label>
+        <input id="js_speakerInput_x" class="form-control" name="[0].Speaker" />
+    </div>
+
+    <form method="post">
+        <div id="js_variableInputFields">
+            <div id="js_input_0" class="form-group">
+                <label id="js_labelTextInput_0" for="js_textInput_0">Text: </label>
+                <input id="js_textInput_0" class="form-control" name="[0].Text" />
+                <label id="js_labelSpeakerInput_0" for="js_speakerInput_0">Sprecher: </label>
+                <input id="js_speakerInput_0" class="form-control" name="[0].Speaker" />
+            </div>
+        </div>
+        <i id="js_addCitation" class="fas fa-plus"></i>
+        <input type="hidden" name="citationBookId" value="@citationBook.Id" />
+        <button id="js_createCitationGroupButton" type="submit" class="btn btn-primary startupBtn" asp-page-handler="CreateCitation">Submit</button>
+    </form>
+</div>
+
+@foreach (var citationGroup in citationBook.CitationGroups.OrderByDescending(c => c.Created))
 {
     <div class="card citationGroup">
         <h5 class="card-title">Author: @citationGroup.Author.FirstName @citationGroup.Author.LastName</h5>
@@ -23,8 +53,37 @@
     </div>
 }
 
-<div id="js_newbookgroup" class="book-outline__new">
-    <div class="book__new w-100">
-        <i class="fas fa-plus"></i>
-    </div>
-</div>
+<script>
+    var currentId = 1;
+
+    $(function () {
+        $("#js_addCitation").click(function () {
+            var clone = $("#js_exampleInput").clone();
+            clone.removeClass("d-none");
+            clone.attr("id", "js_input_" + currentId);
+
+            clone.find("#js_textInput_x").attr("name", "[" + currentId + "].Text");
+            clone.find("#js_speakerInput_x").attr("name", "[" + currentId + "].Speaker");
+            clone.find("#js_labelTextInput_x").attr("for", "js_textInput_" + currentId);
+            clone.find("#js_labelSpeakerInput_x").attr("for", "js_speakerInput_" + currentId);
+
+            clone.find("#js_labelTextInput_x").attr("id", "js_labelTextInput_" + currentId);
+            clone.find("#js_textInput_x").attr("id", "js_textInput_" + currentId);
+            clone.find("#js_labelSpeakerInput_x").attr("id", "js_labelSpeakerInput_" + currentId);
+            clone.find("#js_speakerInput_x").attr("id", "js_speakerInput_" + currentId);
+
+            $("#js_variableInputFields").append(clone);
+
+            currentId++;
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $("#js_newCitationGroup").click(function () {
+            $(this).addClass("d-none");
+            $("#js_createCitation").removeClass("d-none");
+        });
+    });
+</script>

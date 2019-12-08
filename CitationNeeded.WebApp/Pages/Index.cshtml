@@ -47,6 +47,29 @@ else
 @section Scripts 
 {
     <script>
+        function qs(key) {
+            key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+            var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+            return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+        }
+
+        function loadCitationBook(cbId) {
+            $('#js_content').load('?handler=CitationBookPartial&citationBookId=' + cbId);
+        }
+
+        $(function () {
+            var citationBookId = qs("citationBookId");
+
+            if (citationBookId == null || citationBookId.length == 0) {
+                return;
+            }
+
+            loadCitationBook(citationBookId);
+            window.history.replaceState({}, null, "");
+        })
+    </script>
+
+    <script>
         $(function () {
             $("#js_newbookplus").click(function () {
                 $(this).addClass("d-none");
@@ -69,7 +92,7 @@ else
         $(function () {
             $(".book-outline").click(function () {
                 var citationBookId = $(this).data("citationbook-id");
-                $('#js_content').load('?handler=CitationBookPartial&citationBookId=' + citationBookId);
+                loadCitationBook(citationBookId);
             });
         });
     </script>
