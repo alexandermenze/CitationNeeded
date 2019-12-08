@@ -4,16 +4,27 @@
 
 @foreach (var citationGroup in citationBook.CitationGroups)
 {
-    <div class="card" style="width: 18rem;">
+    <div class="card citationGroup">
         <h5 class="card-title">Author: @citationGroup.Author</h5>
         <h6 class="card-subtitle mb-2 text-muted">Created: @citationGroup.Created</h6>
         <ul class="list-group list-group-flush">
             @foreach (var citation in citationGroup.Citations)
             {
                 <li class="list-group-item">
-                    @citation.Speaker: @citation.Text
+                    <div class="speaker">
+                        @citation.Speaker
+                    </div>
+                    <div class="text">
+                        @citation.Text
+                    </div>
                 </li>
             }
         </ul>
     </div>
 }
+
+<div id="js_newbookgroup" class="book-outline__new">
+    <div class="book__new w-100">
+        <i class="fas fa-plus"></i>
+    </div>
+</div>
