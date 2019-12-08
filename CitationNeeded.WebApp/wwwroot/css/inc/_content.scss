@@ -3,8 +3,13 @@
     overflow: auto;
     background-color: $white-bg;
 
-    #titlebar {
+    #js_sidebarTrigger {
         position: sticky;
         top: 0;
+        background-color: $white-bg;
+
+        .fa-bars {
+            color: $green;
+        }
     }
 }

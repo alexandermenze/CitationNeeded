@@ -113,9 +113,12 @@ body {
   grid-area: content;
   overflow: auto;
   background-color: #ffffff; }
-  #content #titlebar {
+  #content #js_sidebarTrigger {
     position: sticky;
-    top: 0; }
+    top: 0;
+    background-color: #ffffff; }
+    #content #js_sidebarTrigger .fa-bars {
+      color: #32a852; }
 
 .field-validation-valid {
   display: none; }
