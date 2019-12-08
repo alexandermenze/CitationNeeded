@@ -7,6 +7,11 @@
 .btn {
     box-shadow: none !important;
 }
+
+button:focus {
+    outline: none;
+}
+
 .btn-primary {
     background-color: $green;
     border-color: $green;
@@ -34,4 +39,31 @@ a {
 .form-control:focus {
     box-shadow: $box-shadow $green__transparent;
     border-color: $green__lighter;
+}
+
+//Floating Action Button
+.fab {
+    position: fixed;
+    z-index: 15;
+    right: 15px;
+    bottom: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    width: 55px;
+    height: 55px;
+    border: none;
+
+    background-color: $green;
+    color: white;
+    font-size: 45px;
+    line-height: 40px;
+    border-radius: 100%;
+    box-shadow: 0 6px 10px 0 #666;
+
+    @media (min-width: 768px) {
+        right: 40px;
+        bottom: 40px;
+    }
 }
