@@ -127,8 +127,9 @@ body {
   display: none; }
 
 .citationGroup {
-  margin: 15px;
-  color: #4a4a4a; }
+  margin-bottom: 15px;
+  color: #4a4a4a;
+  background: green; }
   .citationGroup .card-title {
     color: #32a852; }
   .citationGroup h5, .citationGroup h6 {
@@ -139,3 +140,13 @@ body {
     text-align: right; }
   .citationGroup .list-group-item:nth-child(odd) {
     background: #f8f8f8; }
+  @media (min-width: 768px) {
+    .citationGroup {
+      margin: 15px; } }
+  @media (max-width: 768px) {
+    .citationGroup {
+      border-radius: 0px;
+      border-left: none;
+      border-right: none; }
+      .citationGroup .list-group:last-child .list-group-item:last-child {
+        border-radius: 0px; } }
