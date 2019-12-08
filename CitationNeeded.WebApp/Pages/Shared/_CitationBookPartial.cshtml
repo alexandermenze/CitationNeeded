@@ -2,8 +2,6 @@
     var citationBook = (CitationNeeded.Domain.ValueTypes.CitationBook)ViewData["CitationBook"];
 }
 
-<a href="#top"></a>
-
 <div id="js_createCitation" class="d-none">
 
     <div id="js_exampleInput" class="form-group d-none">
@@ -86,13 +84,9 @@
 <script>
     $(function () {
         $("#js_newCitationGroup").click(function () {
-            $("a[href='#top']").click(function() {
-              $("html, body").animate({ scrollTop: 0 }, "slow");
-              return false;
-            });
-
             $(this).addClass("d-none");
             $("#js_createCitation").removeClass("d-none");
+            $('#content').animate({ scrollTop: 0 }, 200);
         });
     });
 </script>
