@@ -2,16 +2,16 @@
     var citationBook = (CitationNeeded.Domain.ValueTypes.CitationBook)ViewData["CitationBook"];
 }
 
+<div id="js_exampleInput" class="form-group d-none">
+    <label id="js_labelTextInput_x" for="js_textInput_x">Zitat: </label>
+    <input id="js_textInput_x" class="form-control" name="[0].Text" />
+    <label id="js_labelSpeakerInput_x" for="js_speakerInput_x">Sprecher: </label>
+    <input id="js_speakerInput_x" class="form-control" name="[0].Speaker" />
+</div>
+
 <div id="js_createCitation" class="card citationGroup d-none">
     <form method="post">
         <div class="card-body">
-
-            <div id="js_exampleInput" class="form-group d-none">
-                <label id="js_labelTextInput_x" for="js_textInput_x">Zitat: </label>
-                <input id="js_textInput_x" class="form-control" name="[0].Text" />
-                <label id="js_labelSpeakerInput_x" for="js_speakerInput_x">Sprecher: </label>
-                <input id="js_speakerInput_x" class="form-control" name="[0].Speaker" />
-            </div>
 
             <div id="js_variableInputFields">
                 <div id="js_input_0" class="form-group mb-0">
@@ -24,7 +24,7 @@
         </div>
 
         <div class="card-footer">
-            <button id="js_addCitation" class="btn btn-outline-secondary">
+            <button id="js_addCitation" type="button" class="btn btn-outline-secondary">
                 <i class="fas fa-plus"></i>
             </button>
             <input type="hidden" name="citationBookId" value="@citationBook.Id" />
@@ -36,34 +36,34 @@
 @foreach (var citationGroup in citationBook.CitationGroups.OrderByDescending(c => c.Created))
 {
     <div class="card citationGroup">
-        <form method="post">
-            <input type="hidden" name="citationGroupId" value="@citationGroup.Id" />
-            <input type="hidden" name="citationBookId" value="@citationBook.Id" />
-            <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    @foreach (var citation in citationGroup.Citations)
-                    {
-                        <li class="list-group-item">
-                            <div class="speaker">
-                                @citation.Speaker
-                            </div>
-                            <div class="text">
-                                @citation.Text
-                            </div>
-                        </li>
-                    }
-                </ul>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                @foreach (var citation in citationGroup.Citations)
+                {
+                    <li class="list-group-item">
+                        <div class="speaker">
+                            @citation.Speaker
+                        </div>
+                        <div class="text">
+                            @citation.Text
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="card-footer">
+            <div>
+                <div class="author">Verfasser: @citationGroup.Author.FirstName @citationGroup.Author.LastName</div>
+                <div class="card-subtitle text-muted">Erstellt: @citationGroup.Created</div>
             </div>
-            <div class="card-footer">
-                <div>
-                    <div class="author">Verfasser: @citationGroup.Author.FirstName @citationGroup.Author.LastName</div>
-                    <div class="card-subtitle text-muted">Erstellt: @citationGroup.Created</div>
-                </div>
+            <form method="post">
+                <input type="hidden" name="citationGroupId" value="@citationGroup.Id" />
+                <input type="hidden" name="citationBookId" value="@citationBook.Id" />
                 <button type="submit" class="btn btn-primary btn-delete" asp-page-handler="DeleteCitation">
                     <i class="far fa-trash-alt"></i>
                 </button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 }
 
